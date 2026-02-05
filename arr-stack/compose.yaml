@@ -1,0 +1,217 @@
+networks:
+  arr-network:
+    name: arr-network
+    ipam:
+      config:
+        - subnet: 172.39.0.0/24
+  nginx-proxy-manager:
+    external: true
+
+services:
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    networks:
+      arr-network:
+        ipv4_address: 172.39.0.2
+    ports:
+      - 8080:8080 # qbittorrent web interface
+      - ${FIREWALL_VPN_INPUT_PORTS}:${FIREWALL_VPN_INPUT_PORTS} # qbittorrent torrent port
+      - 6789:6789 # nzbget
+      - 9696:9696 # prowlarr
+      - 9117:9117 # jackett
+    volumes:
+      - ./gluetun:/gluetun
+    env_file:
+      - .env
+    environment:
+      - BLOCK_MALICIOUS=off
+      - HEALTH_TARGET_ADDRESSES=www.google.com
+      - DNS_ADDRESS=8.8.8.8
+    healthcheck:
+      test: ping -c 1 www.google.com || exit 1
+      interval: 20s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    restart: unless-stopped
+    labels:
+      - deunhealth.restart.on.unhealthy=true
+    environment:
+      - PUID=${PUID:-950}
+      - PGID=${PGID:-950}
+      - TZ=${TZ:-Etc/UTC}
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=${FIREWALL_VPN_INPUT_PORTS}
+    volumes:
+      - ./qbittorrent:/config
+      - /mnt/NVMe/downloads:/downloads
+    depends_on:
+      gluetun:
+        condition: service_healthy
+        restart: true
+    network_mode: service:gluetun
+    healthcheck:
+      test: ping -c 1 www.google.com || exit 1
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+  
+  deunhealth:
+    image: qmcgaw/deunhealth
+    container_name: deunhealth
+    network_mode: "none"
+    environment:
+      - LOG_LEVEL=info
+      - HEALTH_SERVER_ADDRESS=127.0.0.1:9999
+      - TZ=${TZ:-Etc/UTC}
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  nzbget:
+    image: lscr.io/linuxserver/nzbget:latest
+    container_name: nzbget
+    environment:
+      - PUID=${PUID:-950}
+      - PGID=${PGID:-950}
+      - TZ=${TZ:-Etc/UTC}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./nzbget:/config
+      - /mnt/NVMe/downloads:/downloads
+    depends_on:
+      gluetun:
+        condition: service_healthy
+        restart: true
+    restart: unless-stopped
+    network_mode: service:gluetun
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=${PUID:-950}
+      - PGID=${PGID:-950}
+      - TZ=${TZ:-Etc/UTC}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./prowlarr:/config
+    restart: unless-stopped
+    depends_on:
+      gluetun:
+        condition: service_healthy
+        restart: true
+    network_mode: service:gluetun
+  
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    environment:
+      - PUID=${PUID:-950}
+      - PGID=${PGID:-950}
+      - TZ=${TZ:-Etc/UTC}
+      - AUTO_UPDATE=true
+    volumes:
+      - ./jackett:/config
+      - /mnt/NVMe/downloads:/downloads
+    depends_on:
+      gluetun:
+        condition: service_healthy
+        restart: true
+    network_mode: service:gluetun
+    restart: unless-stopped
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    restart: unless-stopped
+    environment:
+      - PUID=3000
+      - PGID=3000
+      - TZ=${TZ:-Etc/UTC}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./sonarr:/config
+      - /mnt/storage0/storage/media:/data
+      - /mnt/NVMe/downloads:/data/downloads
+    networks:
+      arr-network:
+        ipv4_address: 172.39.0.3
+      nginx-proxy-manager: {}
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    restart: unless-stopped
+    environment:
+      - PUID=3000
+      - PGID=3000
+      - TZ=${TZ:-Etc/UTC}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./radarr:/config
+      - /mnt/storage0/storage/media:/data
+      - /mnt/NVMe/downloads:/data/downloads
+    networks:
+      arr-network:
+        ipv4_address: 172.39.0.4
+      nginx-proxy-manager: {}
+
+  lidarr:
+    container_name: lidarr
+    image: lscr.io/linuxserver/lidarr:latest
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./lidarr:/config
+      - /mnt/storage0/storage/media:/data
+      - /mnt/NVMe/downloads:/data/downloads
+    environment:
+      - PUID=${PUID:-950}
+      - PGID=${PGID:-950}
+      - TZ=${TZ:-Etc/UTC}
+    networks:
+      arr-network:
+        ipv4_address: 172.39.0.5
+      nginx-proxy-manager: {}
+
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID:-950}
+      - PGID=${PGID:-950}
+      - TZ=${TZ:-Etc/UTC}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./bazarr:/config
+      - /mnt/storage0/storage/media:/data
+      - /mnt/NVMe/downloads:/data/downloads
+    networks:
+      arr-network:
+        ipv4_address: 172.39.0.6
+      nginx-proxy-manager: {}
+
+  jellyseerr:
+    container_name: jellyseerr
+    image: fallenbagel/jellyseerr:latest
+    environment:
+      - PUID=${PUID:-3000}
+      - PGID=${PGID:-3000}
+      - TZ=${TZ:-Etc/UTC}
+    volumes:
+      - ./jellyseerr:/app/config
+    networks:
+      arr-network:
+        ipv4_address: 172.39.0.9
+      nginx-proxy-manager: {}
+    restart: unless-stopped

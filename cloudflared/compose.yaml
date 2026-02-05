@@ -1,0 +1,12 @@
+services:
+  cloudflared:
+    image: wisdomsky/cloudflared-web:latest
+    container_name: cloudflared
+    volumes:
+      - ./config:/config
+    restart: unless-stopped
+
+networks:
+  default:
+    external: true
+    name: nginx-proxy-manager

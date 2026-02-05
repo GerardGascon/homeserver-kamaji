@@ -1,0 +1,36 @@
+services:
+  docmost:
+    image: docmost/docmost:latest
+    container_name: docmost
+    depends_on:
+      - docmost-redis
+    env_file:
+      - .env
+    environment:
+      APP_URL: "https://docs.home.gerardgascon.com"
+      APP_SECRET: "${APP_SECRET}"
+      DATABASE_URL: "postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}?schema=public"
+      REDIS_URL: "redis://docmost-redis:6379"
+    volumes:
+      - ./docmost_data:/app/data/storage
+    healthcheck:
+      test: timeout 10s bash -c ':> /dev/tcp/127.0.0.1/3000' || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 90s
+    restart: unless-stopped
+  
+  docmost-redis:
+    image: redis:7.2-alpine
+    container_name: docmost-redis
+    volumes:
+      - ./redis_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping || exit 1"]
+    restart: unless-stopped
+
+networks:
+  default:
+    external: true
+    name: nginx-proxy-manager

@@ -1,0 +1,18 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:alpine
+    container_name: vaultwarden
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DOMAIN: "https://vault.home.gerardgascon.com"
+      DATABASE_URL: "postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}"
+      SIGNUPS_ALLOWED: false
+    volumes:
+      - ./data/:/data/
+
+networks:
+  default:
+    external: true
+    name: nginx-proxy-manager

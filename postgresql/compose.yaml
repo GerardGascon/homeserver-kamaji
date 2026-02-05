@@ -1,0 +1,39 @@
+services:
+  postgresql:
+    image: postgres:17-alpine
+    container_name: postgresql
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    networks:
+      - postgres-network
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+    restart: unless-stopped
+  
+  pgadmin:
+    image: dpage/pgadmin4:9.11
+    container_name: pgadmin
+    env_file:
+      - .env
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+    depends_on:
+      - postgresql
+    networks:
+      - postgres-network
+      - nginx-proxy-manager
+    volumes:
+      - ./pgadmin-data:/var/lib/pgadmin
+    restart: unless-stopped
+
+networks: 
+  postgres-network:
+    driver: bridge
+  nginx-proxy-manager:
+    external: true

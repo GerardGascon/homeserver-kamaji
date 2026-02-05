@@ -1,0 +1,20 @@
+services:
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: code-server
+    env_file:
+      - .env
+    environment:
+      - PUID=${PUID:-950}
+      - PGID=${PGID:-950}
+      - TZ=${TZ:-Etc/UTC}
+      - PASSWORD=${PASSWORD}
+    volumes:
+      - ./config:/config
+      - /mnt/NVMe/apps:/services
+    restart: unless-stopped
+
+networks:
+  default:
+    external: true
+    name: nginx-proxy-manager

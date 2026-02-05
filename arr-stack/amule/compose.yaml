@@ -1,0 +1,21 @@
+services:
+  amule:
+    image: ngosang/amule:latest
+    container_name: amule
+    network_mode: container:gluetun
+    env_file:
+      - .env
+    environment:
+      - PUID=${PUID:-950}
+      - PGID=${PGID:-950}
+      - TZ=${TZ:-Etc/UTC}
+      - GUI_PWD=${GUI_PWD}
+      - MOD_AUTO_RESTART_ENABLED=true
+      - MOD_AUTO_RESTART_CRON=*/15 * * * *
+      - MOD_FIX_KAD_BOOTSTRAP_ENABLED=true
+      - MOD_FIX_KAD_GRAPH_ENABLED=true
+    volumes:
+      - ./config:/home/amule/.aMule
+      - /mnt/NVMe/downloads/aMule:/incoming
+      - /mnt/NVMe/downloads/aMule/temp:/temp
+    restart: unless-stopped

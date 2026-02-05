@@ -1,0 +1,16 @@
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:18.8.0-ce.0
+    container_name: gitlab
+    ports:
+      - 2424:22
+    volumes:
+      - ./config:/etc/gitlab
+      - ./logs:/var/log/gitlab
+      - ./data:/var/opt/gitlab
+    restart: unless-stopped
+
+networks:
+  default:
+    external: true
+    name: nginx-proxy-manager

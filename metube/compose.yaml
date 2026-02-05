@@ -1,0 +1,12 @@
+services:
+  metube:
+    image: ghcr.io/alexta69/metube
+    container_name: metube
+    volumes:
+      - /mnt/NVMe/downloads/metube:/downloads
+    restart: unless-stopped
+
+networks:
+  default:
+    external: true
+    name: nginx-proxy-manager

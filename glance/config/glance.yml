@@ -1,0 +1,493 @@
+server:
+  proxied: true
+
+pages:
+  - name: Startpage
+    center-vertically: true
+    columns:
+      - size: full
+        widgets:
+          - type: search
+            search-engine: duckduckgo
+            bangs:
+              - title: YouTube
+                shortcut: "!yt"
+                url: https://www.youtube.com/results?search_query={QUERY}
+
+          - type: bookmarks
+            groups:
+              - title: General
+                links:
+                  - title: Gmail
+                    url: https://mail.google.com/mail/u/0/
+                  - title: GitHub
+                    url: https://github.com/
+                  - title: TrueNAS
+                    url: https://nas.home.gerardgascon.com/
+              - title: Entertainment
+                links:
+                  - title: YouTube
+                    url: https://www.youtube.com/
+                  - title: Prime Video
+                    url: https://www.primevideo.com/
+              - title: Social
+                links:
+                  - title: Mastodon
+                    url: https://mastodon.gamedev.place/
+                  - title: Bluesy
+                    url: https://bsky.app/
+                  - title: Instagram
+                    url: https://www.instagram.com/
+
+          - type: docker-containers
+            title: Services
+            hide-by-default: true
+            containers:
+              # the key is the container_name from compose.yaml
+              jellyfin:
+                name: Jellyfin
+                description: Media
+                url: https://jellyfin.home.gerardgascon.com
+                icon: si:jellyfin
+                hide: false
+              nginx-proxy-manager:
+                name: Nginx Proxy Manager
+                description: Reverse Proxy
+                url: https://nginx.home.gerardgascon.com
+                icon: si:nginxproxymanager
+                hide: false
+              pihole:
+                name: Pi-hole
+                description: Ad-blocking
+                url: https://pihole.home.gerardgascon.com/admin
+                icon: si:pihole
+                hide: false
+              tailscale:
+                name: Tailscale
+                description: Zero Trust Access
+                icon: si:tailscale
+                hide: false
+              gitlab:
+                name: GitLab
+                description: Version Control Service
+                url: https://git.home.gerardgascon.com
+                icon: si:gitlab
+                hide: false
+              vaultwarden:
+                name: Vaultwarden
+                description: Password Manager
+                url: https://vault.home.gerardgascon.com
+                icon: si:vaultwarden
+                hide: false
+              docmost:
+                name: Docmost
+                description: Collaborative Wiki & Documentation
+                url: https://docs.home.gerardgascon.com
+                icon: si:notion
+                hide: false
+              gateway-nginx:
+                name: Gateway
+                description: VPN Access Proxy
+                url: https://gateway.home.gerardgascon.com
+                icon: si:wireguard
+                hide: false
+              code-server:
+                name: Code Server
+                description: Edit server files
+                url: https://code.home.gerardgascon.com
+                icon: si:htmx
+                hide: false
+              cloudflared:
+                name: Cloudflared
+                description: Zero Trust Access
+                url: https://cloudflared.home.gerardgascon.com
+                icon: si:cloudflare
+                hide: false
+              uptime-kuma:
+                name: Uptime Kuma
+                description: Service Monitoring Tool
+                url: https://uptime.home.gerardgascon.com
+                icon: si:uptimekuma
+                hide: false
+              torreta-del-drac-server:
+                name: Torreta del Drac Server
+                url: https://torreta.home.gerardgascon.com/admin
+                icon: si:redragon 
+                hide: false
+              linkwarden:
+                name: Linkwarden
+                description: Bookmark Manager
+                url: https://links.home.gerardgascon.com
+                icon: si:linktree
+                hide: false
+              rss-reader:
+                name: RSS Reader
+                description: Notification System for RSS
+                url: https://rss-reader.home.gerardgascon.com/admin
+                icon: si:rss
+                hide: false
+              metube:
+                name: MeTube
+                description: YouTube Video Downloader
+                url: https://youtube.home.gerardgascon.com/admin
+                icon: si:youtube
+                hide: false
+              immich_server:
+                name: Immich
+                description: Image & Video Management
+                url: https://photos.home.gerardgascon.com
+                icon: si:immich
+                hide: false
+              papra:
+                name: Papra
+                description: Document Management & Archiving
+                url: https://papra.home.gerardgascon.com
+                hide: false
+              nextcloud-aio-mastercontainer:
+                name: Nextcloud
+                description: Productivity Platform
+                url: https://nextcloud.home.gerardgascon.com
+                icon: si:nextcloud
+                hide: false
+              openspeedtest:
+                name: Speedtest
+                description: Test Connection to NAS
+                url: https://openspeedtest.home.gerardgascon.com
+                icon: si:speedtest
+                hide: false
+              beszel:
+                name: Beszel
+                description: System Monitoring
+                url: https://beszel.home.gerardgascon.com
+                icon: si:uptimekuma
+                hide: false
+              stirling-pdf:
+                name: Stirling PDF
+                description: PDF Editor
+                url: https://pdf.home.gerardgascon.com
+                icon: si:ilovepdf
+                hide: false
+              tugtainer:
+                name: Tugtainer
+                description: Docker Updater
+                url: https://tugtainer.home.gerardgascon.com
+                icon: si:watchtower
+                hide: false
+
+          - type: docker-containers
+            title: Arr Stack
+            hide-by-default: true
+            containers:
+              gluetun:
+                name: Gluetun
+                description: VPN Connection
+                icon: si:wireguard
+                hide: false
+              qbittorrent:
+                name: qBittorrent
+                description: BitTorrent Client
+                url: https://qbittorrent.home.gerardgascon.com
+                icon: si:qbittorrent
+                hide: false
+              nzbget:
+                name: NZBget
+                description: NZB Downloader
+                url: https://nzbget.home.gerardgascon.com
+                icon: si:qbittorrent
+                hide: false
+              prowlarr:
+                name: Prowlarr
+                description: Indexer Manager
+                url: https://prowlarr.home.gerardgascon.com
+                icon: si:qbittorrent
+                hide: false
+              jackett:
+                name: Jackett
+                description: Indexer Manager
+                url: https://jackett.home.gerardgascon.com
+                icon: si:qbittorrent
+                hide: false
+              sonarr:
+                name: Sonarr
+                description: Personal Video Recorder for Usenet
+                url: https://sonarr.home.gerardgascon.com
+                icon: si:sonarr
+                hide: false
+              radarr:
+                name: Radarr
+                description: Movie Collection Manager
+                url: https://radarr.home.gerardgascon.com
+                icon: si:radarr
+                hide: false
+              lidarr:
+                name: Lidarr
+                description: Music Collection Manager
+                url: https://lidarr.home.gerardgascon.com
+                icon: si:radarr
+                hide: false
+              bazarr:
+                name: Bazarr
+                description: Subtitle Collection Manager
+                url: https://bazarr.home.gerardgascon.com
+                icon: si:radarr
+                hide: false
+              jellyseerr:
+                name: Jellyseerr
+                description: Media Request Manager
+                url: https://jellyseerr.home.gerardgascon.com
+                icon: si:radarr
+                hide: false
+              amule:
+                name: aMule
+                description: P2P File Sharing
+                url: https://amule.home.gerardgascon.com
+                hide: false
+
+      - size: small
+        widgets:
+          - type: dns-stats
+            cache: 5s
+            service: pihole-v6
+            url: https://pihole.home.gerardgascon.com
+            password: ${PIHOLE_PASSWORD}
+
+          - type: custom-api
+            title: "Jellyfin Stats"
+            base-url: https://jellyfin.home.gerardgascon.com
+            options:
+              url: https://jellyfin.home.gerardgascon.com
+              key: ${JELLYFIN_API_KEY}
+            template: |
+              {{ $url := .Options.StringOr "url" "" }}
+              {{ $key := .Options.StringOr "key" "" }}
+
+              {{- if or (eq $url "") (eq $key "") -}}
+
+                <p>Error: The URL or API Key was not configured in the widget options.</p>
+
+              {{- else -}}
+
+                {{- $requestUrl := printf "%s/emby/Items/Counts?api_key=%s" $url $key -}}
+                {{- $jellyfinData := newRequest $requestUrl | getResponse -}}
+
+                {{- if eq $jellyfinData.Response.StatusCode 200 -}}
+                  <div class="flex flex-column gap-5">
+                    <div class="flex justify-between text-center">
+
+                      <div>
+                        <div class="color-highlight size-h3">{{ $jellyfinData.JSON.Int "MovieCount" | formatNumber }}</div>
+                        <div class="size-h5 uppercase">Movies</div>
+                      </div>
+
+                      <div>
+                        <div class="color-highlight size-h3">{{ $jellyfinData.JSON.Int "SeriesCount" | formatNumber }}</div>
+                        <div class="size-h5 uppercase">TV Shows</div>
+                      </div>
+
+                      <div>
+                        <div class="color-highlight size-h3">{{ $jellyfinData.JSON.Int "EpisodeCount" | formatNumber }}</div>
+                        <div class="size-h5 uppercase">Episodes</div>
+                      </div>
+
+                      <div>
+                        <div class="color-highlight size-h3">{{ $jellyfinData.JSON.Int "SongCount" | formatNumber }}</div>
+                        <div class="size-h5 uppercase">Songs</div>
+                      </div>
+
+                    </div>
+                  </div>
+                {{- else -}}
+                  <p>Failed: {{ $jellyfinData.Response.Status }}</p>
+                {{- end -}}
+              {{- end -}}
+
+          - type: custom-api
+            title: Server Status
+            title-url: https://uptime.home.gerardgascon.com
+            url: https://uptime.home.gerardgascon.com/api/status-page/${UPTIME_KUMA_STATUS_SLUG}
+            subrequests:
+              heartbeats:
+                url: https://uptime.home.gerardgascon.com/api/status-page/heartbeat/${UPTIME_KUMA_STATUS_SLUG}
+            cache: 1m
+            template: |
+              {{ $hb := .Subrequest "heartbeats" }}
+
+              {{ if not (.JSON.Exists "publicGroupList") }}
+              <p class="color-negative">Error reading response</p>
+              {{ else if eq (len (.JSON.Array "publicGroupList")) 0 }}
+              <p>No monitors found</p>
+              {{ else }}
+
+              <ul class="dynamic-columns list-gap-8">
+                {{ range .JSON.Array "publicGroupList" }}
+                {{ range .Array "monitorList" }}
+                {{ $id := .String "id" }}
+                {{ $hbArray := $hb.JSON.Array (print "heartbeatList." $id) }}
+                <div class="flex items-center gap-12">
+                  <a class="size-title-dynamic color-highlight text-truncate block grow" href="https://uptime.home.gerardgascon.com/dashboard/{{ $id }}"
+                    target="_blank" rel="noreferrer">
+                    {{ .String "name" }} </a>
+
+                  {{ if gt (len $hbArray) 0 }}
+                    {{ $latest := index $hbArray (sub (len $hbArray) 1) }}
+                    {{ if eq ($latest.Int "status") 1 }}
+                    <div>{{ $latest.Int "ping" }}ms</div>
+                    <div class="monitor-site-status-icon-compact" title="OK">
+                      <svg fill="var(--color-positive)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                          d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z"
+                          clip-rule="evenodd"></path>
+                      </svg>
+                    </div>
+                    {{ else }}
+                    <div><span class="color-negative">DOWN</span></div>
+                    <div class="monitor-site-status-icon-compact" title="{{ if $latest.Exists "msg" }}{{ $latest.String "msg" }}{{ else
+                      }}Error{{ end }}">
+                      <svg fill="var(--color-negative)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                          d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495ZM10 5a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 10 5Zm0 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+                          clip-rule="evenodd"></path>
+                      </svg>
+                    </div>
+                    {{ end }}
+                  {{ else }}
+                    <div><span class="color-negative">No data</span></div>
+                    <div class="monitor-site-status-icon-compact" title="No data available">
+                      <svg fill="var(--color-negative)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M10 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm0-2a6 6 0 1 0 0-12 6 6 0 0 0 0 12zm-.75-8a.75.75 0 0 1 1.5 0v3a.75.75 0 0 1-1.5 0V8zm.75 5a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                      </svg>
+                    </div>
+                  {{ end }}
+                </div>
+                {{ end }}
+                {{ end }}
+              </ul>
+              {{ end }}
+
+          - type: custom-api
+            title: Immich stats
+            cache: 1m
+            url: https://immich.home.gerardgascon.com/api/server/statistics
+            headers:
+              x-api-key: ${IMMICH_API_KEY}
+              Accept: application/json
+            template: |
+              <div class="flex justify-between text-center">
+                <div>
+                    <div class="color-highlight size-h3">{{ .JSON.Int "photos" | formatNumber }}</div>
+                    <div class="size-h6">PHOTOS</div>
+                </div>
+                <div>
+                    <div class="color-highlight size-h3">{{ .JSON.Int "videos" | formatNumber }}</div>
+                    <div class="size-h6">VIDEOS</div>
+                </div>
+                <div>
+                    <div class="color-highlight size-h3">{{ div (.JSON.Int "usage" | toFloat) 1073741824 | toInt | formatNumber }}GB</div>
+                    <div class="size-h6">USAGE</div>
+                </div>
+              </div>
+
+  - name: Home
+    # Optionally, if you only have a single page you can hide the desktop navigation for a cleaner look
+    # hide-desktop-navigation: true
+    columns:
+      - size: small
+        widgets:
+          - type: calendar
+            first-day-of-week: monday
+
+          - type: twitch-channels
+            cache: 5m
+            channels:
+              - rothiotome
+
+      - size: full
+        widgets:
+          - type: rss
+            limit: 100
+            collapse-after: 5
+            cache: 1m
+            style: detailed-list
+            feeds:
+              - url: https://gamedev.lgbt/@nepo.rss
+                title: '@nepo@gamedev.lgbt'
+              - url: https://mastodon.social/@noelfb.rss
+                title: '@noelfb@mastodon.social'
+              - url: https://bsky.app/profile/did:plc:zz2jkpw2ns4hpc4jqjupehti/rss
+                title: '@nanakiichan.bsky.social'
+              - url: https://bsky.app/profile/did:plc:ro425bjnmfurari2s2mn56v6/rss
+                title: '@soerbgames.bsky.social'
+              - url: https://bsky.app/profile/did:plc:kkmeclnecawrtzxpmbt6nfkq/rss
+                title: '@malagajam.bsky.social'
+              - url: https://nepo.dev/feed.atom
+                title: "Nepo's blog"
+              - url: https://bsky.app/profile/did:plc:ppxvayameytz6lg4i43ocj6e/rss
+                title: "@guadalindie.bsky.social"
+              - url: https://bsky.app/profile/did:plc:3rvd2p4yy2ba5yq3i3j74rc7/rss
+                title: "@indiedevday.bsky.social"
+              - url: https://bsky.app/profile/did:plc:icro5224dt6vxjzlzwhffim7/rss
+                title: "@bcngamefest.bsky.social"
+              - url: https://bsky.app/profile/did:plc:javftu63osqahp42676rippd/rss
+                title: "@vivarium-game.bsky.social"
+              - url: https://bsky.app/profile/did:plc:burk33h6rxg457fz7shn7ff2/rss
+                title: "@warpdoor.com"
+              - url: https://bsky.app/profile/did:plc:gpgitsax6u77lwbwfxx5ppor/rss
+                title: "@delunado.com"
+              - url: https://xotdoctubre.substack.com/feed
+                title: "Xot d'octubre (La Negu)"
+              - url: https://feeds.feedburner.com/elpixelilustre
+                title: "El Pixel Ilustre"
+
+          - type: group
+            widgets:
+              - type: hacker-news
+              - type: lobsters
+
+          - type: videos
+            channels:
+              - UCXuqSBlHAE6Xw-yeJA0Tunw # Linus Tech Tips
+              - UCR-DXc1voovS8nhAvccRZhg # Jeff Geerling
+              - UCsBjURrPoezykLs9EqgamOA # Fireship
+              - UCBJycsmduvYEL83R_U4JriQ # Marques Brownlee
+              - UCHnyfMqiRRG1u-2MsSQLbXA # Veritasium
+
+          - type: group
+            widgets:
+              - type: reddit
+                subreddit: technology
+                show-thumbnails: true
+              - type: reddit
+                subreddit: selfhosted
+                show-thumbnails: true
+
+      - size: small
+        widgets:
+          - type: weather
+            location: Barcelona, Spain
+            units: metric
+            hour-format: 24h
+
+          - type: custom-api
+            title: Random Fact
+            cache: 6h
+            url: https://uselessfacts.jsph.pl/api/v2/facts/random
+            template: |
+              <p class="size-h4 color-paragraph">{{ .JSON.String "text" }}</p>
+
+          - type: custom-api
+            title: Steam Specials
+            cache: 12h
+            url: https://store.steampowered.com/api/featuredcategories?cc=us
+            template: |
+              <ul class="list list-gap-10 collapsible-container" data-collapse-after="5">
+              {{ range .JSON.Array "specials.items" }}
+                <li>
+                  <a class="size-h4 color-highlight block text-truncate" href="https://store.steampowered.com/app/{{ .Int "id" }}/">{{ .String "name" }}</a>
+                  <ul class="list-horizontal-text">
+                    <li>{{ div (.Int "final_price" | toFloat) 100 | printf "$%.2f" }}</li>
+                    {{ $discount := .Int "discount_percent" }}
+                    <li{{ if ge $discount 40 }} class="color-positive"{{ end }}>{{ $discount }}% off</li>
+                  </ul>
+                </li>
+              {{ end }}
+              </ul>

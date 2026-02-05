@@ -1,0 +1,31 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    networks:
+      - nginx-proxy-manager
+    environment:
+      - PUID=${PUID:-950}
+      - PGID=${PGID:-950}
+      - TZ=${TZ:-Etc/UTC}
+    volumes:
+      - ./config:/config
+      - ./cache:/cache
+      - /mnt/storage0/storage/media:/media
+    ports:
+      - 10.8.0.6:8096:8096
+      - 7359:7359/udp # Service Discovery
+      - 1900:1900/udp # Client Discovery
+    restart: unless-stopped
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+networks:
+  nginx-proxy-manager:
+    external: true

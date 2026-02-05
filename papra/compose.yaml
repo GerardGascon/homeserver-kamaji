@@ -1,0 +1,17 @@
+services:
+  papra:
+    image: corentinth/papra:latest
+    container_name: papra
+    restart: unless-stopped
+    environment:
+      - AUTH_SECRET=CcjZJ6NiypvgqirkNVk3LqzAbMw8qcqXESBUeVHHH4NbJFtT
+      - APP_BASE_URL=https://papra.home.gerardgascon.com
+      - AUTH_IS_REGISTRATION_ENABLED=false
+    volumes:
+      - ./data:/app/app-data
+    user: 950:950
+
+networks:
+  default:
+    external: true
+    name: nginx-proxy-manager

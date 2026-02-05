@@ -1,0 +1,19 @@
+services:
+  glance:
+    container_name: glance
+    image: glanceapp/glance
+    restart: unless-stopped
+    volumes:
+      - ./config:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock
+    env_file:
+      - .env
+    environment:
+      - PIHOLE_PASSWORD=${PIHOLE_PASSWORD}
+      - JELLYFIN_API_KEY=${JELLYFIN_API_KEY}
+      - UPTIME_KUMA_STATUS_SLUG=${UPTIME_KUMA_STATUS_SLUG}
+
+networks:
+  default:
+    external: true
+    name: nginx-proxy-manager

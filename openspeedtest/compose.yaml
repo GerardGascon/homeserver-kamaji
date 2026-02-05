@@ -1,0 +1,12 @@
+services:
+  speedtest:
+    image: openspeedtest/latest
+    container_name: openspeedtest
+    environment:
+      - MODE=standalone
+    restart: unless-stopped
+
+networks:
+  default:
+    external: true
+    name: nginx-proxy-manager

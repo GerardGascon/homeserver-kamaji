@@ -1,0 +1,9 @@
+[submodule "torreta-del-drac-server"]
+	path = torreta-del-drac-server
+	url = https://git.gerardgascon.com/Geri/torreta-del-drac-server.git
+[submodule "rss-reader"]
+	path = rss-reader
+	url = https://git.gerardgascon.com/Geri/rss-reader.git
+[submodule "game-of-the-day-trigger"]
+	path = game-of-the-day-trigger
+	url = https://git.gerardgascon.com/Geri/game-of-the-day-trigger.git
