@@ -167,11 +167,11 @@ pages:
                 url: https://pdf.home.gerardgascon.com
                 icon: si:ilovepdf
                 hide: false
-              tugtainer:
-                name: Tugtainer
-                description: Docker Updater
-                url: https://tugtainer.home.gerardgascon.com
-                icon: si:watchtower
+              woodpecker-server:
+                name: Woodpecker CI
+                description: CI Pipelines
+                url: https://ci.gerardgascon.com
+                icon: si:jenkins
                 hide: false
 
           - type: docker-containers

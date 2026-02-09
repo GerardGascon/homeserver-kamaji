@@ -1,6 +1,7 @@
 services:
   woodpecker-server:
     image: woodpeckerci/woodpecker-server:v3
+    container_name: woodpecker-server
     volumes:
       - woodpecker-server-data:/var/lib/woodpecker/
     env_file:
@@ -19,6 +20,7 @@ services:
 
   woodpecker-agent:
     image: woodpeckerci/woodpecker-agent:v3
+    container_name: woodpecker-agent
     command: agent
     depends_on:
       - woodpecker-server
