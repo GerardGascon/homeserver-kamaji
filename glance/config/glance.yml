@@ -173,6 +173,12 @@ pages:
                 url: https://ci.gerardgascon.com
                 icon: si:jenkins
                 hide: false
+              mealie:
+                name: Mealie
+                description: Recipe Management
+                url: https://mealie.home.gerardgascon.com
+                icon: si:mealie
+                hide: false
 
           - type: docker-containers
             title: Arr Stack

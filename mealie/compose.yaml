@@ -1,0 +1,32 @@
+services:
+  mealie:
+    image: ghcr.io/mealie-recipes/mealie:latest
+    container_name: mealie
+    restart: unless-stopped
+    # ports:
+    #     - "9925:9000" # 
+    deploy:
+      resources:
+        limits:
+          memory: 1000M
+    volumes:
+      - ./data:/app/data/
+    env_file:
+      - .env
+    environment:
+      - ALLOW_SIGNUP=false
+      - PUID=${PUID:-950}
+      - PGID=${PGID:-950}
+      - TZ=${TZ:-Etc/UTC}
+      - BASE_URL=https://mealie.home.gerardgascon.com
+      - DB_ENGINE=postgres
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_SERVER=${POSTGRES_SERVER}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_DB=${POSTGRES_DB}
+
+networks:
+  default:
+    external: true
+    name: nginx-proxy-manager
