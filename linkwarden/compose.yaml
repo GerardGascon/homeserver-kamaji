@@ -4,6 +4,7 @@ services:
     container_name: linkwarden
     networks:
       - nginx-proxy-manager
+      - default
     dns:
       - 1.1.1.1
       - 8.8.8.8
@@ -15,11 +16,18 @@ services:
       - ./data:/data/data
     depends_on:
       - meilisearch
+    deploy:
+      resources:
+        limits:
+          cpus: 0.5
+          memory: 1gb
     restart: unless-stopped
   
   meilisearch:
     image: getmeili/meilisearch:v1.12.8
     container_name: meilisearch
+    networks:
+      - default
     dns:
       - 1.1.1.1
       - 8.8.8.8
@@ -27,8 +35,15 @@ services:
       - .env
     volumes:
       - ./meili_data:/meili_data
+    deploy:
+      resources:
+        limits:
+          cpus: 0.5
+          memory: 1gb
     restart: unless-stopped
 
 networks:
   nginx-proxy-manager:
     external: true
+  default:
+    driver: bridge
