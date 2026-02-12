@@ -2,6 +2,11 @@ services:
   linkwarden:
     image: ghcr.io/linkwarden/linkwarden:latest # comment to build from source
     container_name: linkwarden
+    networks:
+      - nginx-proxy-manager
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     env_file:
       - .env
     environment:
@@ -15,6 +20,9 @@ services:
   meilisearch:
     image: getmeili/meilisearch:v1.12.8
     container_name: meilisearch
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     env_file:
       - .env
     volumes:
@@ -22,6 +30,5 @@ services:
     restart: unless-stopped
 
 networks:
-  default:
+  nginx-proxy-manager:
     external: true
-    name: nginx-proxy-manager

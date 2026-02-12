@@ -2,6 +2,9 @@ services:
   code-server:
     image: lscr.io/linuxserver/code-server:latest
     container_name: code-server
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     env_file:
       - .env
     environment:
