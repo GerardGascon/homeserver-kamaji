@@ -6,12 +6,16 @@ services:
       - nginx-proxy-manager
     volumes:
       - ./beszel_data:/beszel_data
+    healthcheck:
+      # The URL is relative to the container, not the host
+      test: ['CMD', '/beszel', 'health', '--url', 'http://localhost:8090']
+      start_period: 5s # Check 5 seconds after the container starts
+      interval: 120s # Then check every 120 seconds after that
     restart: unless-stopped
 
   beszel-agent:
     image: henrygd/beszel-agent-nvidia
     container_name: beszel-agent
-    restart: unless-stopped
     network_mode: host
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -26,6 +30,9 @@ services:
       - KEY=${KEY}
       - TOKEN=${TOKEN}
       - HUB_URL=https://beszel.home.gerardgascon.com
+    # healthcheck:
+    #   test: ['CMD', '/agent', 'health']
+    #   interval: 120s
     deploy:
       resources:
         reservations:
@@ -34,6 +41,7 @@ services:
               count: all
               capabilities:
                 - utility
+    restart: unless-stopped
 
 networks:
   nginx-proxy-manager:
