@@ -1,0 +1,27 @@
+services:
+  linkwarden:
+    image: ghcr.io/linkwarden/linkwarden:latest # comment to build from source
+    container_name: linkwarden
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}
+    volumes:
+      - ./data:/data/data
+    depends_on:
+      - meilisearch
+    restart: unless-stopped
+  
+  meilisearch:
+    image: getmeili/meilisearch:v1.12.8
+    container_name: meilisearch
+    env_file:
+      - .env
+    volumes:
+      - ./meili_data:/meili_data
+    restart: unless-stopped
+
+networks:
+  default:
+    external: true
+    name: nginx-proxy-manager
