@@ -179,6 +179,12 @@ pages:
                 url: https://mealie.home.gerardgascon.com
                 icon: si:mealie
                 hide: false
+              jellystat:
+                name: JellyStat
+                description: Jellyfin Statistics
+                url: https://jellystat.home.gerardgascon.com
+                icon: si:jellyfin
+                hide: false
 
           - type: docker-containers
             title: Arr Stack

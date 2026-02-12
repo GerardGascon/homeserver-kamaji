@@ -25,6 +25,25 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
+  
+  jellystat:
+    image: cyfershepard/jellystat:latest
+    container_name: jellystat
+    restart: unless-stopped
+    networks:
+      - nginx-proxy-manager
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_IP=${POSTGRES_IP}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - JWT_SECRET=${JWT_SECRET}
+      - TZ=${TZ:-Etc/UTC}
+    volumes:
+      - ./jellystat-backup:/app/backend/backup-data
 
 networks:
   nginx-proxy-manager:
