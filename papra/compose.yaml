@@ -3,8 +3,10 @@ services:
     image: corentinth/papra:latest
     container_name: papra
     restart: unless-stopped
+    env_file:
+      - .env
     environment:
-      - AUTH_SECRET=CcjZJ6NiypvgqirkNVk3LqzAbMw8qcqXESBUeVHHH4NbJFtT
+      - AUTH_SECRET=${AUTH_SECRET}
       - APP_BASE_URL=https://papra.home.gerardgascon.com
       - AUTH_IS_REGISTRATION_ENABLED=false
     volumes:
