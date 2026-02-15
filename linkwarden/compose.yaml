@@ -16,11 +16,6 @@ services:
       - ./data:/data/data
     depends_on:
       - meilisearch
-    deploy:
-      resources:
-        limits:
-          cpus: 0.5
-          memory: 1gb
     restart: unless-stopped
   
   meilisearch:
@@ -35,11 +30,6 @@ services:
       - .env
     volumes:
       - ./meili_data:/meili_data
-    deploy:
-      resources:
-        limits:
-          cpus: 0.5
-          memory: 1gb
     restart: unless-stopped
 
 networks:
