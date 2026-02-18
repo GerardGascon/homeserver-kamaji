@@ -21,7 +21,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./beszel_agent_data:/var/lib/beszel-agent
       # monitor other disks / partitions by mounting a folder in /extra-filesystems
-      - /mnt/storage0/storage/media/.beszel:/extra-filesystems/sda1__Storage:ro
+      - /mnt/storage0/media/.beszel:/extra-filesystems/sda1__Storage:ro
       - /mnt/NVMe/photos/.beszel:/extra-filesystems/sdb1__Photos:ro
     env_file:
       - .env

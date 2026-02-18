@@ -7,3 +7,6 @@
 [submodule "game-of-the-day-trigger"]
 	path = game-of-the-day-trigger
 	url = https://git.gerardgascon.com/Geri/game-of-the-day-trigger.git
+[submodule "build-bot"]
+	path = build-bot
+	url = https://git.gerardgascon.com/Geri/BuildBot.git

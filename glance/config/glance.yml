@@ -79,12 +79,6 @@ pages:
                 url: https://vault.home.gerardgascon.com
                 icon: si:vaultwarden
                 hide: false
-              docmost:
-                name: Docmost
-                description: Collaborative Wiki & Documentation
-                url: https://docs.home.gerardgascon.com
-                icon: si:notion
-                hide: false
               gateway-nginx:
                 name: Gateway
                 description: VPN Access Proxy

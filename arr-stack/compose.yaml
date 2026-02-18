@@ -51,7 +51,7 @@ services:
       - TORRENTING_PORT=${FIREWALL_VPN_INPUT_PORTS}
     volumes:
       - ./qbittorrent:/config
-      - /mnt/NVMe/downloads:/downloads
+      - /mnt/NVMe/downloads/qbittorrent:/downloads
     depends_on:
       gluetun:
         condition: service_healthy
@@ -140,7 +140,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./sonarr:/config
-      - /mnt/storage0/storage/media:/data
+      - /mnt/storage0/media:/data/media
       - /mnt/NVMe/downloads:/data/downloads
     networks:
       arr-network:
@@ -158,7 +158,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./radarr:/config
-      - /mnt/storage0/storage/media:/data
+      - /mnt/storage0/media:/data/media
       - /mnt/NVMe/downloads:/data/downloads
     networks:
       arr-network:
@@ -172,7 +172,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./lidarr:/config
-      - /mnt/storage0/storage/media:/data
+      - /mnt/storage0/media:/data/media
       - /mnt/NVMe/downloads:/data/downloads
     environment:
       - PUID=${PUID:-950}
@@ -194,7 +194,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./bazarr:/config
-      - /mnt/storage0/storage/media:/data
+      - /mnt/storage0/media:/data/media
       - /mnt/NVMe/downloads:/data/downloads
     networks:
       arr-network:
