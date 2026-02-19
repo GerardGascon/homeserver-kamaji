@@ -34,7 +34,7 @@ pages:
                 links:
                   - title: Mastodon
                     url: https://mastodon.gamedev.place/
-                  - title: Bluesy
+                  - title: Bluesky
                     url: https://bsky.app/
                   - title: Instagram
                     url: https://www.instagram.com/
@@ -409,62 +409,74 @@ pages:
 
       - size: full
         widgets:
-          - type: rss
-            limit: 100
-            collapse-after: 5
-            cache: 1m
-            style: detailed-list
-            feeds:
-              - url: https://gamedev.lgbt/@nepo.rss
-                title: '@nepo@gamedev.lgbt'
-              - url: https://mastodon.social/@noelfb.rss
-                title: '@noelfb@mastodon.social'
-              - url: https://bsky.app/profile/did:plc:zz2jkpw2ns4hpc4jqjupehti/rss
-                title: '@nanakiichan.bsky.social'
-              - url: https://bsky.app/profile/did:plc:ro425bjnmfurari2s2mn56v6/rss
-                title: '@soerbgames.bsky.social'
-              - url: https://bsky.app/profile/did:plc:kkmeclnecawrtzxpmbt6nfkq/rss
-                title: '@malagajam.bsky.social'
-              - url: https://nepo.dev/feed.atom
-                title: "Nepo's blog"
-              - url: https://bsky.app/profile/did:plc:ppxvayameytz6lg4i43ocj6e/rss
-                title: "@guadalindie.bsky.social"
-              - url: https://bsky.app/profile/did:plc:3rvd2p4yy2ba5yq3i3j74rc7/rss
-                title: "@indiedevday.bsky.social"
-              - url: https://bsky.app/profile/did:plc:icro5224dt6vxjzlzwhffim7/rss
-                title: "@bcngamefest.bsky.social"
-              - url: https://bsky.app/profile/did:plc:javftu63osqahp42676rippd/rss
-                title: "@vivarium-game.bsky.social"
-              - url: https://bsky.app/profile/did:plc:burk33h6rxg457fz7shn7ff2/rss
-                title: "@warpdoor.com"
-              - url: https://bsky.app/profile/did:plc:gpgitsax6u77lwbwfxx5ppor/rss
-                title: "@delunado.com"
-              - url: https://xotdoctubre.substack.com/feed
-                title: "Xot d'octubre (La Negu)"
-              - url: https://feeds.feedburner.com/elpixelilustre
-                title: "El Pixel Ilustre"
-
           - type: group
+            define: &shared-properties
+              type: rss
+              limit: 25
+              collapse-after: 5
+              cache: 1m
+              style: detailed-list
             widgets:
-              - type: hacker-news
-              - type: lobsters
+              - title: Friends Socials
+                <<: *shared-properties
+                feeds:
+                  - url: https://gamedev.lgbt/@nepo.rss
+                    title: '@nepo@gamedev.lgbt'
+                  - url: https://bsky.app/profile/did:plc:zz2jkpw2ns4hpc4jqjupehti/rss
+                    title: '@nanakiichan.bsky.social'
+                  - url: https://bsky.app/profile/did:plc:gpgitsax6u77lwbwfxx5ppor/rss
+                    title: "@delunado.com"
+                  - url: 	https://bsky.app/profile/did:plc:pllkfcucbkfmyrv4vvywyxpp/rss
+                    title: "@culoextremo.bsky.social"
+              - title: Blogs
+                <<: *shared-properties
+                feeds:
+                  - url: 	https://xotdoctubre.substack.com/feed
+                    title: "Xot d'octubre"
+                  - url: https://feeds.feedburner.com/elpixelilustre
+                    title: 'El Pixel Ilustre'
+                  - url: https://nepo.dev/feed.atom
+                    title: "Nepo's Blog"
+              - title: Events
+                <<: *shared-properties
+                feeds:
+                  - url: https://bsky.app/profile/did:plc:vlltn4bhhcrpcmg3asuhr6d5/rss
+                    title: "Barcelona Game Creators"
+                  - url: https://bsky.app/profile/did:plc:icro5224dt6vxjzlzwhffim7/rss
+                    title: 'BCN Game Fest'
+                  - url: https://bsky.app/profile/did:plc:3rvd2p4yy2ba5yq3i3j74rc7/rss
+                    title: "IndieDevDay"
+                  - url: https://bsky.app/profile/did:plc:ppxvayameytz6lg4i43ocj6e/rss
+                    title: "Guadalindie"
+                  - url: hhttps://bsky.app/profile/did:plc:kkmeclnecawrtzxpmbt6nfkq/rss
+                    title: "MálagaJam"
+                  - url: hhttps://bsky.app/profile/did:plc:kkmeclnecawrtzxpmbt6nfkq/rss
+                    title: "MálagaJam"
+              - title: Games
+                <<: *shared-properties
+                feeds:
+                  - url: https://bsky.app/profile/did:plc:javftu63osqahp42676rippd/rss
+                    title: "Vivarium"
+                  - url: https://bsky.app/profile/did:plc:burk33h6rxg457fz7shn7ff2/rss
+                    title: "Warp Door"
+              - title: Developers
+                <<: *shared-properties
+                feeds:
+                  - url: https://bsky.app/profile/did:plc:ro425bjnmfurari2s2mn56v6/rss
+                    title: "@soerbgames.bsky.social"
+                  - url: 	https://mastodon.social/@noelfb.rss
+                    title: "@noelfb@mastodon.social"
 
           - type: videos
+            style: grid-cards
+            collapse-after-rows: 2
+            limit: 15
             channels:
               - UCXuqSBlHAE6Xw-yeJA0Tunw # Linus Tech Tips
               - UCR-DXc1voovS8nhAvccRZhg # Jeff Geerling
-              - UCsBjURrPoezykLs9EqgamOA # Fireship
-              - UCBJycsmduvYEL83R_U4JriQ # Marques Brownlee
-              - UCHnyfMqiRRG1u-2MsSQLbXA # Veritasium
-
-          - type: group
-            widgets:
-              - type: reddit
-                subreddit: technology
-                show-thumbnails: true
-              - type: reddit
-                subreddit: selfhosted
-                show-thumbnails: true
+              - UCeeFfhMcJa1kjtfZAGskOCA # TechLinked
+              - UCIKEzFSG9jGjpdhHGEwH3UQ # Andresito
+              - UCgdTVe88YVSrOZ9qKumhULQ # Hardware Haven
 
       - size: small
         widgets:
