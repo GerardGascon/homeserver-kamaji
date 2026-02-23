@@ -2,6 +2,11 @@ services:
   cloudflared:
     image: wisdomsky/cloudflared-web:latest
     container_name: cloudflared
+    env_file:
+      - .env
+    environment:
+      - BASIC_AUTH_USER=${BASIC_AUTH_USER}
+      - BASIC_AUTH_PASS=${BASIC_AUTH_PASS}
     volumes:
       - ./config:/config
     restart: unless-stopped
