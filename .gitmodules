@@ -10,3 +10,6 @@
 [submodule "build-bot"]
 	path = build-bot
 	url = https://git.gerardgascon.com/Geri/BuildBot.git
+[submodule "thinky-dailies"]
+	path = thinky-dailies
+	url = https://git.gerardgascon.com/Geri/thinky-dailies.git
