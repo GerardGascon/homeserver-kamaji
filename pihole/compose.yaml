@@ -7,6 +7,8 @@ services:
       - "53:53/udp"
     environment:
       - TZ=${TZ:-Etc/UTC}
+      - PIHOLE_UID=${PUID:-950}
+      - PIHOLE_GID=${PGID:-950}
     volumes:
       - ./pihole:/etc/pihole
       - ./dnsmasq.d:/etc/dnsmasq.d
