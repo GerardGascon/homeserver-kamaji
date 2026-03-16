@@ -17,7 +17,7 @@ services:
     volumes:
       - ./config:/home/amule/.aMule
       - /mnt/NVMe/downloads/aMule:/incoming
-      - /mnt/NVMe/downloads/aMule/temp:/temp
+      - ./temp:/temp
     restart: unless-stopped
 
 networks:

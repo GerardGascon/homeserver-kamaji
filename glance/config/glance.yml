@@ -24,6 +24,8 @@ pages:
                     url: https://github.com/
                   - title: TrueNAS
                     url: https://nas.home.gerardgascon.com/
+                  - title: Game of the Day Submission
+                    url: ${GAME_OF_THE_DAY_FORM}
               - title: Entertainment
                 links:
                   - title: YouTube
