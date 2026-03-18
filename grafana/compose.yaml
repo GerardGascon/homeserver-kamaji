@@ -5,6 +5,7 @@ services:
     user: ${PUID:-950}
     volumes:
       - ./data:/var/lib/grafana
+      - ./grafana:/etc/grafana/provisioning/datasources
     restart: unless-stopped
 
 networks:

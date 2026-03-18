@@ -1,0 +1,16 @@
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    user: ${PUID:-950}
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - ./data:/prometheus
+    restart: unless-stopped
+
+networks:
+  default:
+    external: true
+    name: nginx-proxy-manager
