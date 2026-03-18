@@ -1,0 +1,13 @@
+services:
+  grafana:
+    image: grafana/grafana-enterprise
+    container_name: grafana
+    user: ${PUID:-950}
+    volumes:
+      - ./data:/var/lib/grafana
+    restart: unless-stopped
+
+networks:
+  default:
+    external: true
+    name: nginx-proxy-manager

@@ -181,6 +181,12 @@ pages:
                 url: https://jellystat.home.gerardgascon.com
                 icon: si:jellyfin
                 hide: false
+              grafana:
+                name: Grafana
+                description: Analytics
+                url: https://grafana.home.gerardgascon.com
+                icon: si:grafana
+                hide: false
 
           - type: docker-containers
             title: Arr Stack
