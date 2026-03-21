@@ -17,6 +17,14 @@ services:
       - WOODPECKER_DATABASE_DRIVER=postgres
       - WOODPECKER_DATABASE_DATASOURCE=postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=disable
     restart: unless-stopped
+    labels:
+      glance.name: Woodpecker CI
+      glance.icon: si:jenkins
+      glance.url: https://ci.gerardgascon.com
+      glance.description: CI Pipelines
+      glance.category: services
+      glance.hide: false
+      glance.id: woodpecker
 
   woodpecker-agent:
     image: woodpeckerci/woodpecker-agent:v3
@@ -33,6 +41,11 @@ services:
       - WOODPECKER_SERVER=woodpecker-server:9000
       - WOODPECKER_AGENT_SECRET=${WOODPECKER_AGENT_SECRET}
     restart: unless-stopped
+    labels:
+      glance.name: Woodpecker Agent
+      glance.category: services
+      glance.hide: false
+      glance.parent: woodpecker
 
 volumes:
   woodpecker-server-data:

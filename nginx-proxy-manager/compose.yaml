@@ -15,6 +15,13 @@ services:
       test: ["CMD", "/usr/bin/check-health"]
       interval: 10s
       timeout: 3s
+    labels:
+      glance.name: Nginx Proxy Manager
+      glance.description: Reverse Proxy
+      glance.url: https://nginx.home.gerardgascon.com
+      glance.icon: si:nginxproxymanager
+      glance.category: services
+      glance.hide: false
 
 networks:
   default:

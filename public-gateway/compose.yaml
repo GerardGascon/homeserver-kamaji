@@ -26,6 +26,11 @@ services:
       timeout: 10s
       retries: 5
     restart: unless-stopped
+    labels:
+      glance.name: Gluetun
+      glance.category: services
+      glance.hide: false
+      glance.parent: gateway
   
   gateway-nginx:
     image: 'jc21/nginx-proxy-manager:latest'
@@ -41,3 +46,11 @@ services:
       test: ["CMD", "/usr/bin/check-health"]
       interval: 10s
       timeout: 3s
+    labels:
+      glance.name: Gateway
+      glance.icon: si:wireguard
+      glance.url: https://git.gerardgascon.com
+      glance.description: VPN Access Proxy
+      glance.category: services
+      glance.hide: false
+      glance.id: gateway

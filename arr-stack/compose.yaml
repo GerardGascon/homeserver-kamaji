@@ -37,13 +37,18 @@ services:
       timeout: 10s
       retries: 5
     restart: unless-stopped
+    labels:
+      glance.name: Gluetun
+      glance.icon: si:wireguard
+      glance.description: VPN Connection
+      glance.category: arr-stack
+      glance.hide: false
+      glance.id: arr-gluetun
 
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
     restart: unless-stopped
-    labels:
-      - deunhealth.restart.on.unhealthy=true
     environment:
       - PUID=${PUID:-950}
       - PGID=${PGID:-950}
@@ -64,6 +69,15 @@ services:
       timeout: 10s
       retries: 3
       start_period: 20s
+    labels:
+      deunhealth.restart.on.unhealthy: true
+      glance.name: qBittorrent
+      glance.icon: si:qbittorrent
+      glance.description: BitTorrent Client
+      glance.url: https://qbittorrent.home.gerardgascon.com
+      glance.category: arr-stack
+      glance.hide: false
+      glance.id: qbittorrent
   
   deunhealth:
     image: qmcgaw/deunhealth
@@ -94,6 +108,14 @@ services:
         restart: true
     restart: unless-stopped
     network_mode: service:gluetun
+    labels:
+      glance.name: NZBget
+      glance.icon: si:abdownloadmanager
+      glance.description: NZB Downloader
+      glance.url: https://nzbget.home.gerardgascon.com
+      glance.category: arr-stack
+      glance.hide: false
+      glance.id: nzbget
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
@@ -111,6 +133,14 @@ services:
         condition: service_healthy
         restart: true
     network_mode: service:gluetun
+    labels:
+      glance.name: Prowlarr
+      glance.icon: si:bittorrent
+      glance.description: Indexer Manager
+      glance.url: https://prowlarr.home.gerardgascon.com
+      glance.category: arr-stack
+      glance.hide: false
+      glance.id: prowlarr
   
   flaresolverr:
     image: flaresolverr/flaresolverr:latest
@@ -143,6 +173,14 @@ services:
         restart: true
     network_mode: service:gluetun
     restart: unless-stopped
+    labels:
+      glance.name: Jackett
+      glance.icon: si:bittorrent
+      glance.description: Indexer Manager
+      glance.url: https://jackett.home.gerardgascon.com
+      glance.category: arr-stack
+      glance.hide: false
+      glance.id: jackett
 
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -161,6 +199,14 @@ services:
       arr-network:
         ipv4_address: 172.39.0.3
       nginx-proxy-manager: {}
+    labels:
+      glance.name: Sonarr
+      glance.icon: si:sonarr
+      glance.description: Shows Collection Manager
+      glance.url: https://sonarr.home.gerardgascon.com
+      glance.category: arr-stack
+      glance.hide: false
+      glance.id: sonarr
 
   radarr:
     image: lscr.io/linuxserver/radarr:latest
@@ -180,6 +226,14 @@ services:
       arr-network:
         ipv4_address: 172.39.0.4
       nginx-proxy-manager: {}
+    labels:
+      glance.name: Radarr
+      glance.icon: si:radarr
+      glance.description: Movie Collection Manager
+      glance.url: https://radarr.home.gerardgascon.com
+      glance.category: arr-stack
+      glance.hide: false
+      glance.id: radarr
 
   lidarr:
     container_name: lidarr
@@ -198,6 +252,14 @@ services:
       arr-network:
         ipv4_address: 172.39.0.5
       nginx-proxy-manager: {}
+    labels:
+      glance.name: Lidarr
+      glance.icon: si:sonarr
+      glance.description: Music Collection Manager
+      glance.url: https://lidarr.home.gerardgascon.com
+      glance.category: arr-stack
+      glance.hide: false
+      glance.id: lidarr
 
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
@@ -216,6 +278,14 @@ services:
       arr-network:
         ipv4_address: 172.39.0.6
       nginx-proxy-manager: {}
+    labels:
+      glance.name: Bazarr
+      glance.icon: si:sonarr
+      glance.description: Subtitle Collection Manager
+      glance.url: https://bazarr.home.gerardgascon.com
+      glance.category: arr-stack
+      glance.hide: false
+      glance.id: bazarr
 
   jellyseerr:
     container_name: jellyseerr
@@ -235,3 +305,11 @@ services:
       interval: 15s
       retries: 3
     restart: unless-stopped
+    labels:
+      glance.name: Seerr
+      glance.icon: si:jellyfin
+      glance.description: Media Request Manager
+      glance.url: https://seerr.home.gerardgascon.com
+      glance.category: arr-stack
+      glance.hide: false
+      glance.id: seerr

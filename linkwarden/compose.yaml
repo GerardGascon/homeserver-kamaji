@@ -14,6 +14,14 @@ services:
     depends_on:
       - meilisearch
     restart: unless-stopped
+    labels:
+      glance.name: Linkwarden
+      glance.icon: si:linktree
+      glance.url: https://links.home.gerardgascon.com
+      glance.description: Bookmark Manager
+      glance.category: services
+      glance.hide: false
+      glance.id: linkwarden
   
   meilisearch:
     image: getmeili/meilisearch:v1.12.8
@@ -25,6 +33,11 @@ services:
     volumes:
       - ./meili_data:/meili_data
     restart: unless-stopped
+    labels:
+      glance.name: Meilisearch
+      glance.category: services
+      glance.hide: false
+      glance.parent: linkwarden
 
 networks:
   nginx-proxy-manager:

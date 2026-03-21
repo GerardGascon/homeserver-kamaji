@@ -1,6 +1,6 @@
 services:
   gitlab:
-    image: gitlab/gitlab-ce:18.8.0-ce.0
+    image: gitlab/gitlab-ce:18.10.0-ce.0
     container_name: gitlab
     ports:
       - 2424:22
@@ -9,6 +9,14 @@ services:
       - ./logs:/var/log/gitlab
       - ./data:/var/opt/gitlab
     restart: unless-stopped
+    labels:
+      glance.name: GitLab
+      glance.icon: si:gitlab
+      glance.url: https://git.gerardgascon.com
+      glance.description: Version Control Service
+      glance.category: services
+      glance.hide: false
+      glance.id: gitlab
 
 networks:
   default:

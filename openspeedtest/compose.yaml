@@ -5,6 +5,14 @@ services:
     environment:
       - MODE=standalone
     restart: unless-stopped
+    labels:
+      glance.name: Speedtest
+      glance.icon: si:speedtest
+      glance.url: https://openspeedtest.home.gerardgascon.com
+      glance.description: Test Connection to the NAS
+      glance.category: services
+      glance.hide: false
+      glance.id: speedtest
 
 networks:
   default:

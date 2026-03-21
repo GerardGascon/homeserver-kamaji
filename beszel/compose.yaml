@@ -12,6 +12,14 @@ services:
       start_period: 5s # Check 5 seconds after the container starts
       interval: 120s # Then check every 120 seconds after that
     restart: unless-stopped
+    labels:
+      glance.name: Beszel
+      glance.icon: si:prometheus
+      glance.url: https://beszel.home.gerardgascon.com
+      glance.description: System Monitoring
+      glance.category: services
+      glance.hide: false
+      glance.id: beszel
 
   beszel-agent:
     image: henrygd/beszel-agent-nvidia
@@ -42,6 +50,11 @@ services:
               capabilities:
                 - utility
     restart: unless-stopped
+    labels:
+      glance.name: Beszel Agent
+      glance.category: services
+      glance.hide: false
+      glance.parent: beszel
 
 networks:
   nginx-proxy-manager:

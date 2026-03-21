@@ -9,3 +9,8 @@ services:
     - RUN_GRAVITY=true
     - CRON=0 * * * *
     restart: unless-stopped
+    labels:
+      glance.parent: pihole
+      glance.name: Nebula Sync
+      glance.category: services
+      glance.hide: false

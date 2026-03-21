@@ -1,8 +1,15 @@
 services:
   gitlab-runner:
-    image: gitlab/gitlab-runner:alpine
+    image: gitlab/gitlab-runner:alpine-v18.10.0
     container_name: gitlab-runner
     volumes:
       - ./config/config.toml:/etc/gitlab-runner/config.toml:ro
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
+    labels:
+      glance.name: GitLab Runner
+      glance.icon: si:gitlab
+      glance.description: GitLab CI
+      glance.category: services
+      glance.hide: false
+      glance.parent: gitlab

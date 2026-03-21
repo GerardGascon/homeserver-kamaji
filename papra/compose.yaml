@@ -2,7 +2,7 @@ services:
   papra:
     image: corentinth/papra:latest
     container_name: papra
-    restart: unless-stopped
+    user: 950:950
     env_file:
       - .env
     environment:
@@ -11,7 +11,14 @@ services:
       - AUTH_IS_REGISTRATION_ENABLED=false
     volumes:
       - ./data:/app/app-data
-    user: 950:950
+    restart: unless-stopped
+    labels:
+      glance.name: Papra
+      glance.url: https://papra.home.gerardgascon.com
+      glance.description: Document Management & Archiving
+      glance.category: services
+      glance.hide: false
+      glance.id: papra
 
 networks:
   default:

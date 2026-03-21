@@ -19,6 +19,14 @@ services:
       - /mnt/NVMe/downloads/aMule:/incoming
       - ./temp:/temp
     restart: unless-stopped
+    labels:
+      glance.name: aMule
+      glance.icon: si:bittorrent
+      glance.description: P2P File Sharing
+      glance.url: https://amule.home.gerardgascon.com
+      glance.category: arr-stack
+      glance.hide: false
+      glance.id: amule
 
 networks:
   default:

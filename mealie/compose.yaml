@@ -25,6 +25,14 @@ services:
       - POSTGRES_SERVER=${POSTGRES_SERVER}
       - POSTGRES_PORT=${POSTGRES_PORT}
       - POSTGRES_DB=${POSTGRES_DB}
+    labels:
+      glance.name: Mealie
+      glance.icon: si:mealie
+      glance.url: https://mealie.home.gerardgascon.com
+      glance.description: Recipe Management
+      glance.category: services
+      glance.hide: false
+      glance.id: mealie
 
 networks:
   default:

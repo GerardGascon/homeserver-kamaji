@@ -21,6 +21,14 @@ services:
       NEXTCLOUD_ENABLE_NVIDIA_GPU: true
       SKIP_DOMAIN_VALIDATION: false # This should only be set to true if things are correctly configured. 
       TALK_PORT: 3478 # This allows to adjust the port that the talk container is using which is exposed on the host. See https://github.com/nextcloud/all-in-one#how-to-adjust-the-talk-port
+    labels:
+      glance.name: Nextcloud
+      glance.icon: si:nextcloud
+      glance.url: https://nextcloud.home.gerardgascon.com
+      glance.description: Productivity Platform
+      glance.category: services
+      glance.hide: false
+      glance.id: nextcloud
 
 volumes:
   nextcloud_aio_mastercontainer:

@@ -12,7 +12,16 @@ services:
     volumes:
       - ./config:/config
       - /mnt/NVMe/apps:/services
+      - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
+    labels:
+      glance.name: Code Server
+      glance.icon: si:htmx
+      glance.url: https://code.home.gerardgascon.com
+      glance.description: Edit server scripts
+      glance.category: services
+      glance.hide: false
+      glance.id: code-server
 
 networks:
   default:

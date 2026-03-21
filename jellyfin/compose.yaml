@@ -25,11 +25,18 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
+    labels:
+      glance.name: Jellyfin
+      glance.icon: si:jellyfin
+      glance.url: https://jellyfin.home.gerardgascon.com
+      glance.description: Media
+      glance.category: services
+      glance.hide: false
+      glance.id: jellyfin
   
   jellystat:
     image: cyfershepard/jellystat:latest
     container_name: jellystat
-    restart: unless-stopped
     networks:
       - nginx-proxy-manager
     env_file:
@@ -44,6 +51,12 @@ services:
       - TZ=${TZ:-Etc/UTC}
     volumes:
       - ./jellystat-backup:/app/backend/backup-data
+    restart: unless-stopped
+    labels:
+      glance.name: Jellystat
+      glance.category: services
+      glance.hide: false
+      glance.parent: jellyfin
 
 networks:
   nginx-proxy-manager:

@@ -17,6 +17,14 @@ services:
       SMTP_PASSWORD: ${SMTP_PASSWORD}
     volumes:
       - ./data/:/data/
+    labels:
+      glance.name: Vaultwarden
+      glance.icon: si:vaultwarden
+      glance.url: https://vault.home.gerardgascon.com
+      glance.description: Password Manager
+      glance.category: services
+      glance.hide: false
+      glance.id: vaultwarden
 
 networks:
   default:

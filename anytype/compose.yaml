@@ -18,3 +18,10 @@ services:
       #             2 TiB = 2199023255552
       # ANY_SYNC_BUNDLE_INIT_FILENODE_DEFAULT_LIMIT: "1099511627776"
     restart: unless-stopped
+    labels:
+      glance.name: Anysync
+      glance.icon: si:anytype
+      glance.description: Anytype backend
+      glance.category: services
+      glance.hide: false
+      glance.id: anysync

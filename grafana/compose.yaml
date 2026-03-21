@@ -7,6 +7,14 @@ services:
       - ./data:/var/lib/grafana
       - ./grafana:/etc/grafana/provisioning/datasources
     restart: unless-stopped
+    labels:
+      glance.name: Grafana
+      glance.icon: si:grafana
+      glance.url: https://grafana.home.gerardgascon.com
+      glance.description: Analytics
+      glance.category: services
+      glance.hide: false
+      glance.id: grafana
 
 networks:
   default:
