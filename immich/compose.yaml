@@ -30,7 +30,7 @@ services:
     labels:
       glance.name: Immich
       glance.icon: si:immich
-      glance.url: https://immich.domain.com
+      glance.url: https://photos.home.gerardgascon.com
       glance.description: Image & video management
       glance.id: immich
       glance.category: services

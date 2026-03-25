@@ -9,6 +9,7 @@ services:
       - AUTH_SECRET=${AUTH_SECRET}
       - APP_BASE_URL=https://papra.home.gerardgascon.com
       - AUTH_IS_REGISTRATION_ENABLED=false
+      - DOCUMENT_STORAGE_MAX_UPLOAD_SIZE=0
     volumes:
       - ./data:/app/app-data
     restart: unless-stopped

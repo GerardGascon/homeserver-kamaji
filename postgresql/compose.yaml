@@ -14,6 +14,14 @@ services:
     volumes:
       - ./db-data:/var/lib/postgresql/data
     restart: unless-stopped
+    labels:
+      glance.name: PostgreSQL
+      glance.icon: si:postgresql
+      glance.description: SQL Database
+      glance.url: https://postgres.home.gerardgascon.com
+      glance.category: services
+      glance.hide: false
+      glance.id: postgres
   
   pgadmin:
     image: dpage/pgadmin4:9.11
@@ -31,6 +39,11 @@ services:
     volumes:
       - ./pgadmin-data:/var/lib/pgadmin
     restart: unless-stopped
+    labels:
+      glance.name: pgAdmin
+      glance.category: services
+      glance.hide: false
+      glance.parent: postgres
 
 networks: 
   postgres-network:

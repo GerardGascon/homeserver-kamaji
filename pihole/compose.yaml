@@ -16,7 +16,7 @@ services:
     labels:
       glance.name: Pi-hole
       glance.icon: si:pihole
-      glance.url: https://pihole.home.gerardgascon.com
+      glance.url: https://pihole.home.gerardgascon.com/admin
       glance.description: Ad-blocking
       glance.category: services
       glance.hide: false

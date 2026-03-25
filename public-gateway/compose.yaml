@@ -49,7 +49,7 @@ services:
     labels:
       glance.name: Gateway
       glance.icon: si:wireguard
-      glance.url: https://git.gerardgascon.com
+      glance.url: https://gateway.home.gerardgascon.com
       glance.description: VPN Access Proxy
       glance.category: services
       glance.hide: false
