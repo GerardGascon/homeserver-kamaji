@@ -13,3 +13,6 @@
 [submodule "thinky-dailies"]
 	path = thinky-dailies
 	url = https://git.gerardgascon.com/Geri/thinky-dailies.git
+[submodule "trash-game"]
+	path = trash-game
+	url = https://git.gerardgascon.com/Geri/trash-game.git
