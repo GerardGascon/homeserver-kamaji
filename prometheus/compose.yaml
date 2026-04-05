@@ -1,7 +1,16 @@
+networks:
+  nginx-proxy-manager:
+    external: true
+  analytics:
+    external: true
+
 services:
   prometheus:
     image: prom/prometheus
     container_name: prometheus
+    networks:
+      - nginx-proxy-manager
+      - analytics
     user: ${PUID:-950}
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -9,6 +18,15 @@ services:
       - ./prometheus:/etc/prometheus
       - ./data:/prometheus
     restart: unless-stopped
+    labels:
+      glance.name: Prometheus
+      glance.icon: si:prometheus
+      glance.url: https://prometheus.home.gerardgascon.com
+      glance.description: Metrics & Monitoring
+      glance.category: services
+      glance.hide: false
+      glance.id: prometheus
+
   # pihole-exporter:
   #   container_name: pihole-exporter
   #   image: ekofr/pihole-exporter:latest
@@ -33,14 +51,24 @@ services:
   node-exporter:
     container_name: node-exporter
     image: quay.io/prometheus/node-exporter:latest
+    networks:
+      - analytics
     command:
       - '--path.rootfs=/host'
     volumes:
       - '/:/host:ro,rslave'
     restart: unless-stopped
+    labels:
+      glance.name: Node exporter
+      glance.category: services
+      glance.hide: false
+      glance.parent: prometheus
+
   cadvisor:
     container_name: cadvisor
     image: gcr.io/cadvisor/cadvisor:latest
+    networks:
+      - analytics
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
@@ -50,8 +78,8 @@ services:
     devices:
       - /dev/kmsg
     restart: unless-stopped
-
-networks:
-  default:
-    external: true
-    name: nginx-proxy-manager
+    labels:
+      glance.name: cAdvisor
+      glance.category: services
+      glance.hide: false
+      glance.parent: prometheus
