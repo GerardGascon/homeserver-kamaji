@@ -27,27 +27,19 @@ services:
       glance.hide: false
       glance.id: prometheus
 
-  # pihole-exporter:
-  #   container_name: pihole-exporter
-  #   image: ekofr/pihole-exporter:latest
-  #   env_file:
-  #     - pihole-exporter.env
-  #   environment:
-  #     - PIHOLE_HOSTNAME=pihole
-  #     - PIHOLE_PASSWORD=${PIHOLE_PASSWORD}
-  #     - INTERVAL=60s
-  #     - PORT=9617
-  #   logging:
-  #     driver: "json-file"
-  #     options:
-  #       max-size: "5k"
-  #       max-file: "5"
-  #   healthcheck:
-  #     test: ["CMD", "wget", "--tries=1", "--spider", "http://localhost:9617/metrics"]
-  #     interval: 300s
-  #     retries: 5
-  #     timeout: 10s
-  #   restart: unless-stopped
+  pihole-exporter:
+    container_name: pihole-exporter
+    image: ekofr/pihole-exporter:latest
+    env_file:
+      - pihole-exporter.env
+    networks:
+      - nginx-proxy-manager
+      - analytics
+    environment:
+      - PIHOLE_HOSTNAME=pihole
+      - INTERVAL=60s
+      - PORT=9617
+    restart: unless-stopped
   node-exporter:
     container_name: node-exporter
     image: quay.io/prometheus/node-exporter:latest
@@ -80,6 +72,28 @@ services:
     restart: unless-stopped
     labels:
       glance.name: cAdvisor
+      glance.category: services
+      glance.hide: false
+      glance.parent: prometheus
+
+  jellyfin-exporter:
+    container_name: jellyfin-exporter
+    image: rebelcore/jellyfin-exporter:latest
+    networks:
+      - analytics
+      - nginx-proxy-manager
+    env_file:
+      - jellyfin-exporter.env
+    environment:
+      - JELLYFIN_ADDRESS=http://jellyfin:8096
+    command:
+      - '--collector.activity'
+      - '--collector.storage'
+      - '--collector.tasks'
+      - '--collector.transcoding'
+    restart: unless-stopped
+    labels:
+      glance.name: Jellyfin exporter
       glance.category: services
       glance.hide: false
       glance.parent: prometheus
