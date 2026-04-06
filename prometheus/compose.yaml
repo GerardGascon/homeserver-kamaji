@@ -40,6 +40,12 @@ services:
       - INTERVAL=60s
       - PORT=9617
     restart: unless-stopped
+    labels:
+      glance.name: Pi-hole exporter
+      glance.category: services
+      glance.hide: false
+      glance.parent: prometheus
+
   node-exporter:
     container_name: node-exporter
     image: quay.io/prometheus/node-exporter:latest
