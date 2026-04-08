@@ -103,3 +103,36 @@ services:
       glance.category: services
       glance.hide: false
       glance.parent: prometheus
+
+  nvidia-smi-exporter:
+    container_name: nvidia-smi-exporter
+    image: utkuozdemir/nvidia_gpu_exporter:1.4.1
+    networks:
+      - analytics
+    volumes:
+      - /usr/lib/x86_64-linux-gnu/libnvidia-ml.so:/usr/lib/x86_64-linux-gnu/libnvidia-ml.so
+      - /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.1:/usr/lib/x86_64-linux-gnu/libnvidia-ml.so.1
+      - /usr/bin/nvidia-smi:/usr/bin/nvidia-smi
+    devices:
+      - /dev/nvidiactl:/dev/nvidiactl
+      - /dev/nvidia0:/dev/nvidia0
+    restart: unless-stopped
+    labels:
+      glance.name: Nvidia SMI exporter
+      glance.category: services
+      glance.hide: false
+      glance.parent: prometheus
+
+  smartctl-exporter:
+    container_name: smartctl-exporter
+    image: prometheuscommunity/smartctl-exporter
+    networks:
+      - analytics
+    privileged: true
+    user: root
+    restart: unless-stopped
+    labels:
+      glance.name: smartctl exporter
+      glance.category: services
+      glance.hide: false
+      glance.parent: prometheus
