@@ -9,6 +9,8 @@ services:
     image: grafana/grafana-enterprise
     container_name: grafana
     user: ${PUID:-950}
+    environment:
+      - GF_SERVER_ROOT_URL=https://grafana.home.gerardgascon.com
     networks:
       - nginx-proxy-manager
       - analytics
