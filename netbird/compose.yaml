@@ -1,0 +1,21 @@
+services:
+  netbird:
+    image: netbirdio/netbird:latest
+    container_name: netbird
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ./config:/var/lib/netbird
+    env_file:
+      - .env
+    environment:
+      - NB_MANAGEMENT_URL=https://netbird.gerardgascon.com
+      - NB_SETUP_KEY=${NB_SETUP_KEY}
+    restart: unless-stopped
+    labels:
+      glance.name: Netbird
+      glance.icon: si:netbird
+      glance.description: Zero Trust Access
+      glance.category: services
+      glance.hide: false
+      glance.id: netbird

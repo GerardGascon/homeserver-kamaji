@@ -49,3 +49,7 @@ scrape_configs:
   static_configs:
   - targets:
     - truenas-exporter:9108
+- job_name: qbittorrent_exporter
+  static_configs:
+  - targets:
+    - qbittorrent-exporter:8000

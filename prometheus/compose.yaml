@@ -145,3 +145,15 @@ services:
     restart: unless-stopped
     env_file:
       - truenas-exporter.env
+
+  qbittorrent-exporter:
+    container_name: qbittorrent-exporter
+    image: ghcr.io/esanchezm/prometheus-qbittorrent-exporter
+    networks:
+      - analytics
+    environment:
+      - QBITTORRENT_PORT=443
+      - QBITTORRENT_HOST=qbittorrent.home.gerardgascon.com
+    env_file:
+      - qbittorrent.env
+    restart: unless-stopped
