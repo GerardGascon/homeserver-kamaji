@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
     labels:
       glance.name: Netbird
-      glance.icon: si:netbird
+      glance.icon: si:tailscale
       glance.description: Zero Trust Access
       glance.category: services
       glance.hide: false
