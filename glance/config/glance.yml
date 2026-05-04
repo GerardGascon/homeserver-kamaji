@@ -14,8 +14,8 @@ pages:
             groups:
               - title: General
                 links:
-                  - title: Gmail
-                    url: https://mail.google.com/mail/u/0/
+                  - title: Proton Mail
+                    url: https://mail.proton.me/
                   - title: GitHub
                     url: https://github.com/
                   - title: TrueNAS

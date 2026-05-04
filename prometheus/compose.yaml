@@ -67,6 +67,9 @@ services:
     image: gcr.io/cadvisor/cadvisor:latest
     networks:
       - analytics
+    command:
+      - '-housekeeping_interval=15s'
+      - '-docker_only=true'
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
