@@ -1,0 +1,18 @@
+networks:
+  nginx-proxy-manager:
+    external: true
+
+services:
+  filebrowser:
+    image: filebrowser/filebrowser
+    container_name: filebrowser
+    user: 950:950
+    networks:
+      - nginx-proxy-manager
+    volumes:
+      - /mnt/NVMe/files:/srv
+      - ./database:/database
+      - ./config:/config
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
