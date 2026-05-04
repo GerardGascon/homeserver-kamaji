@@ -16,3 +16,11 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
+    labels:
+      glance.name: File Browser
+      glance.icon: si:files
+      glance.url: https://files.home.gerardgascon.com
+      glance.description: Browse server files
+      glance.category: services
+      glance.hide: false
+      glance.id: filebrowser
