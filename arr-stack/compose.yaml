@@ -18,7 +18,12 @@ services:
         ipv4_address: 172.39.0.2
     ports:
       - 8080:8080 # qbittorrent web interface
-      - ${FIREWALL_VPN_INPUT_PORTS}:${FIREWALL_VPN_INPUT_PORTS} # qbittorrent torrent port
+      - 4711:4711 # aMule web interface
+      - ${TORRENTING_PORT}:${TORRENTING_PORT} # qbittorrent torrent port
+      - ${AMULE_ED2K_TCP}:4662 # aMule ed2k tcp
+      - ${AMULE_ED2K_GLOBAL_SEARCH}:4665/udp # aMule ed2k global search udp (tcp port +3)
+      # TODO: Forward this port from the VPN
+      # - ${AMULE_ED2K_UDP}:4672/udp # amule ed2k udp
       - 6789:6789 # nzbget
       - 9696:9696 # prowlarr
       - 9117:9117 # jackett
@@ -31,6 +36,9 @@ services:
       - BLOCK_MALICIOUS=off
       - HEALTH_TARGET_ADDRESSES=www.google.com
       - DNS_ADDRESS=8.8.8.8
+      # - FIREWALL_VPN_INPUT_PORTS=${TORRENTING_PORT},${AMULE_ED2K_TCP},${AMULE_ED2K_GLOBAL_SEARCH},${AMULE_ED2K_UDP}
+      - FIREWALL_VPN_INPUT_PORTS=${TORRENTING_PORT},${AMULE_ED2K_TCP},${AMULE_ED2K_GLOBAL_SEARCH}
+      # - FIREWALL_VPN_INPUT_PORTS=${TORRENTING_PORT}
     healthcheck:
       test: ping -c 1 www.google.com || exit 1
       interval: 20s
@@ -54,7 +62,7 @@ services:
       - PGID=${PGID:-950}
       - TZ=${TZ:-Etc/UTC}
       - WEBUI_PORT=8080
-      - TORRENTING_PORT=${FIREWALL_VPN_INPUT_PORTS}
+      - TORRENTING_PORT=${TORRENTING_PORT}
     volumes:
       - ./qbittorrent:/config
       - /mnt/NVMe/downloads/qbittorrent:/downloads
@@ -78,6 +86,39 @@ services:
       glance.category: arr-stack
       glance.hide: false
       glance.id: qbittorrent
+  
+  amule:
+    image: ngosang/amule:latest
+    container_name: amule
+    env_file:
+      - .env
+    environment:
+      - PUID=${AMULE_PUID:-950}
+      - PGID=${AMULE_PGID:-950}
+      - TZ=${TZ:-Etc/UTC}
+      - GUI_PWD=${AMULE_GUI_PWD}
+      - MOD_AUTO_RESTART_ENABLED=true
+      - MOD_AUTO_RESTART_CRON=*/15 * * * *'
+      - MOD_FIX_KAD_BOOTSTRAP_ENABLED=true
+      - MOD_FIX_KAD_GRAPH_ENABLED=true
+    volumes:
+      - ./amule/config:/home/amule/.aMule
+      - ./amule/temp:/temp
+      - /mnt/NVMe/downloads/aMule:/incoming
+    depends_on:
+      gluetun:
+        condition: service_healthy
+        restart: true
+    network_mode: service:gluetun
+    restart: unless-stopped
+    labels:
+      glance.name: aMule
+      glance.icon: si:bittorrent
+      glance.description: P2P File Sharing
+      glance.url: https://amule.home.gerardgascon.com
+      glance.category: arr-stack
+      glance.hide: false
+      glance.id: amule
   
   deunhealth:
     image: qmcgaw/deunhealth
