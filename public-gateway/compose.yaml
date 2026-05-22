@@ -3,13 +3,11 @@ networks:
     external: true
 
 services:
-  gluetun:
+  gateway-gluetun:
     image: qmcgaw/gluetun
     container_name: gateway-gluetun
     networks:
       nginx-proxy-manager: {}
-    ports:
-      - 8811:81 # nginx proxy manager web interface
     cap_add:
       - NET_ADMIN
     volumes:
@@ -35,7 +33,7 @@ services:
   gateway-nginx:
     image: 'jc21/nginx-proxy-manager:latest'
     container_name: gateway-nginx
-    network_mode: service:gluetun
+    network_mode: service:gateway-gluetun
     environment:
       - TZ=${TZ:-Etc/UTC}
     volumes:
