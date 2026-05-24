@@ -17,7 +17,7 @@ services:
     labels:
       glance.name: Linkwarden
       glance.icon: si:linktree
-      glance.url: https://links.home.gerardgascon.com
+      glance.url: https://links.kamaji.gerardgascon.com
       glance.description: Bookmark Manager
       glance.category: services
       glance.hide: false

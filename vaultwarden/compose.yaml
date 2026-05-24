@@ -6,7 +6,7 @@ services:
     env_file:
       - .env
     environment:
-      DOMAIN: "https://vault.home.gerardgascon.com"
+      DOMAIN: "https://vault.gerardgascon.com"
       DATABASE_URL: "postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}"
       SIGNUPS_ALLOWED: false
       SMTP_HOST: smtp.protonmail.ch
@@ -20,7 +20,7 @@ services:
     labels:
       glance.name: Vaultwarden
       glance.icon: si:vaultwarden
-      glance.url: https://vault.home.gerardgascon.com
+      glance.url: https://vault.gerardgascon.com
       glance.description: Password Manager
       glance.category: services
       glance.hide: false

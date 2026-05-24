@@ -19,7 +19,7 @@ services:
     labels:
       glance.name: File Browser
       glance.icon: si:files
-      glance.url: https://files.home.gerardgascon.com
+      glance.url: https://files.kamaji.gerardgascon.com
       glance.description: Browse server files
       glance.category: services
       glance.hide: false

@@ -24,7 +24,7 @@ services:
     labels:
       glance.name: Jellyfin
       glance.icon: si:jellyfin
-      glance.url: https://jellyfin.home.gerardgascon.com
+      glance.url: https://jellyfin.kamaji.gerardgascon.com
       glance.description: Media
       glance.category: services
       glance.hide: false

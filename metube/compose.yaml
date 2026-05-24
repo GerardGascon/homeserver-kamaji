@@ -9,7 +9,7 @@ services:
       glance.name: MeTube
       glance.icon: si:youtube
       glance.description: YouTube Video Downloader
-      glance.url: https://youtube.home.gerardgascon.com/admin
+      glance.url: https://youtube.kamaji.gerardgascon.com/admin
       glance.category: arr-stack
       glance.hide: false
       glance.id: metube

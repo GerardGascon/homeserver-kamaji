@@ -8,7 +8,7 @@ services:
     labels:
       glance.name: Uptime Kuma
       glance.icon: si:uptimekuma
-      glance.url: https://uptime.home.gerardgascon.com
+      glance.url: https://uptime.kamaji.gerardgascon.com
       glance.description: Service Monitoring Tool
       glance.category: services
       glance.hide: false

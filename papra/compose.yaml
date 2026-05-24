@@ -7,7 +7,7 @@ services:
       - .env
     environment:
       - AUTH_SECRET=${AUTH_SECRET}
-      - APP_BASE_URL=https://papra.home.gerardgascon.com
+      - APP_BASE_URL=https://papra.kamaji.gerardgascon.com
       - AUTH_IS_REGISTRATION_ENABLED=false
       - DOCUMENT_STORAGE_MAX_UPLOAD_SIZE=0
     volumes:
@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
     labels:
       glance.name: Papra
-      glance.url: https://papra.home.gerardgascon.com
+      glance.url: https://papra.kamaji.gerardgascon.com
       glance.description: Document Management & Archiving
       glance.category: services
       glance.hide: false

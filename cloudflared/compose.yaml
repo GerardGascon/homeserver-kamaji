@@ -13,7 +13,7 @@ services:
     labels:
       glance.name: Cloudflared
       glance.icon: si:cloudflare
-      glance.url: https://cloudflared.home.gerardgascon.com
+      glance.url: https://cloudflared.kamaji.gerardgascon.com
       glance.description: Zero Trust Access
       glance.category: services
       glance.hide: false

@@ -1,0 +1,15 @@
+networks:
+  nginx-proxy-manager:
+    external: true
+
+services:
+  handbrake:
+    image: jlesage/handbrake
+    networks:
+      - nginx-proxy-manager
+    volumes:
+      - "./config:/config:rw"
+      - "./storage:/storage:ro"
+      # TODO: See how I can automate this
+      # - "/home/user/HandBrake/watch:/watch:rw"
+      # - "/home/user/HandBrake/output:/output:rw"

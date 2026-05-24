@@ -70,7 +70,7 @@ services:
       glance.name: qBittorrent
       glance.icon: si:qbittorrent
       glance.description: BitTorrent Client
-      glance.url: https://qbittorrent.home.gerardgascon.com
+      glance.url: https://qbittorrent.kamaji.gerardgascon.com
       glance.category: arr-stack
       glance.hide: false
       glance.id: qbittorrent
@@ -103,7 +103,7 @@ services:
       glance.name: aMule
       glance.icon: si:bittorrent
       glance.description: P2P File Sharing
-      glance.url: https://amule.home.gerardgascon.com
+      glance.url: https://amule.kamaji.gerardgascon.com
       glance.category: arr-stack
       glance.hide: false
       glance.id: amule
@@ -141,7 +141,7 @@ services:
       glance.name: NZBget
       glance.icon: si:abdownloadmanager
       glance.description: NZB Downloader
-      glance.url: https://nzbget.home.gerardgascon.com
+      glance.url: https://nzbget.kamaji.gerardgascon.com
       glance.category: arr-stack
       glance.hide: false
       glance.id: nzbget
@@ -166,7 +166,7 @@ services:
       glance.name: Prowlarr
       glance.icon: si:bittorrent
       glance.description: Indexer Manager
-      glance.url: https://prowlarr.home.gerardgascon.com
+      glance.url: https://prowlarr.kamaji.gerardgascon.com
       glance.category: arr-stack
       glance.hide: false
       glance.id: prowlarr
@@ -206,7 +206,7 @@ services:
       glance.name: Jackett
       glance.icon: si:bittorrent
       glance.description: Indexer Manager
-      glance.url: https://jackett.home.gerardgascon.com
+      glance.url: https://jackett.kamaji.gerardgascon.com
       glance.category: arr-stack
       glance.hide: false
       glance.id: jackett
@@ -232,7 +232,7 @@ services:
       glance.name: Sonarr
       glance.icon: si:sonarr
       glance.description: Shows Collection Manager
-      glance.url: https://sonarr.home.gerardgascon.com
+      glance.url: https://sonarr.kamaji.gerardgascon.com
       glance.category: arr-stack
       glance.hide: false
       glance.id: sonarr
@@ -259,7 +259,7 @@ services:
       glance.name: Radarr
       glance.icon: si:radarr
       glance.description: Movie Collection Manager
-      glance.url: https://radarr.home.gerardgascon.com
+      glance.url: https://radarr.kamaji.gerardgascon.com
       glance.category: arr-stack
       glance.hide: false
       glance.id: radarr
@@ -285,7 +285,7 @@ services:
       glance.name: Lidarr
       glance.icon: si:sonarr
       glance.description: Music Collection Manager
-      glance.url: https://lidarr.home.gerardgascon.com
+      glance.url: https://lidarr.kamaji.gerardgascon.com
       glance.category: arr-stack
       glance.hide: false
       glance.id: lidarr
@@ -311,7 +311,7 @@ services:
       glance.name: Bazarr
       glance.icon: si:sonarr
       glance.description: Subtitle Collection Manager
-      glance.url: https://bazarr.home.gerardgascon.com
+      glance.url: https://bazarr.kamaji.gerardgascon.com
       glance.category: arr-stack
       glance.hide: false
       glance.id: bazarr
@@ -338,7 +338,7 @@ services:
       glance.name: Seerr
       glance.icon: si:jellyfin
       glance.description: Media Request Manager
-      glance.url: https://seerr.home.gerardgascon.com
+      glance.url: https://seerr.kamaji.gerardgascon.com
       glance.category: arr-stack
       glance.hide: false
       glance.id: seerr

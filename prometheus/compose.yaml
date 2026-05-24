@@ -21,7 +21,7 @@ services:
     labels:
       glance.name: Prometheus
       glance.icon: si:prometheus
-      glance.url: https://prometheus.home.gerardgascon.com
+      glance.url: https://prometheus.kamaji.gerardgascon.com
       glance.description: Metrics & Monitoring
       glance.category: services
       glance.hide: false
@@ -156,7 +156,7 @@ services:
       - analytics
     environment:
       - QBITTORRENT_PORT=443
-      - QBITTORRENT_HOST=qbittorrent.home.gerardgascon.com
+      - QBITTORRENT_HOST=qbittorrent.kamaji.gerardgascon.com
     env_file:
       - qbittorrent.env
     restart: unless-stopped

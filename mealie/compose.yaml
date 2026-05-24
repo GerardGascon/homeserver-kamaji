@@ -3,8 +3,6 @@ services:
     image: ghcr.io/mealie-recipes/mealie:latest
     container_name: mealie
     restart: unless-stopped
-    # ports:
-    #     - "9925:9000" # 
     deploy:
       resources:
         limits:
@@ -18,7 +16,7 @@ services:
       - PUID=${PUID:-950}
       - PGID=${PGID:-950}
       - TZ=${TZ:-Etc/UTC}
-      - BASE_URL=https://mealie.home.gerardgascon.com
+      - BASE_URL=https://mealie.kamaji.gerardgascon.com
       - DB_ENGINE=postgres
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -28,7 +26,7 @@ services:
     labels:
       glance.name: Mealie
       glance.icon: si:mealie
-      glance.url: https://mealie.home.gerardgascon.com
+      glance.url: https://mealie.kamaji.gerardgascon.com
       glance.description: Recipe Management
       glance.category: services
       glance.hide: false

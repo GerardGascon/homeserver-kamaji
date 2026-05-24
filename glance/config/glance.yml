@@ -2,7 +2,7 @@ server:
   proxied: true
 
 pages:
-  - name: Startpage
+  - name: Kamaji's Startpage
     center-vertically: true
     columns:
       - size: full
@@ -19,7 +19,7 @@ pages:
                   - title: GitHub
                     url: https://github.com/
                   - title: TrueNAS
-                    url: https://nas.home.gerardgascon.com/
+                    url: https://nas.kamaji.gerardgascon.com/
                   - title: Game of the Day Submission
                     url: ${GAME_OF_THE_DAY_FORM}
               - title: Entertainment
@@ -50,17 +50,26 @@ pages:
 
       - size: small
         widgets:
+          - type: bookmarks
+            title: Servers
+            groups:
+              - links:
+                - title: Kamaji
+                  url: https://kamaji.gerardgascon.com/
+                - title: Sakamoto
+                  url: https://sakamoto.gerardgascon.com/
+          
           - type: dns-stats
             cache: 5s
             service: pihole-v6
-            url: https://pihole.home.gerardgascon.com
+            url: https://pihole.kamaji.gerardgascon.com
             password: ${PIHOLE_PASSWORD}
 
           - type: custom-api
             title: "Jellyfin Stats"
-            base-url: https://jellyfin.home.gerardgascon.com
+            base-url: https://jellyfin.kamaji.gerardgascon.com
             options:
-              url: https://jellyfin.home.gerardgascon.com
+              url: https://jellyfin.kamaji.gerardgascon.com
               key: ${JELLYFIN_API_KEY}
             template: |
               {{ $url := .Options.StringOr "url" "" }}
@@ -108,11 +117,11 @@ pages:
 
           - type: custom-api
             title: Server Status
-            title-url: https://uptime.home.gerardgascon.com
-            url: https://uptime.home.gerardgascon.com/api/status-page/${UPTIME_KUMA_STATUS_SLUG}
+            title-url: https://uptime.kamaji.gerardgascon.com
+            url: https://uptime.kamaji.gerardgascon.com/api/status-page/${UPTIME_KUMA_STATUS_SLUG}
             subrequests:
               heartbeats:
-                url: https://uptime.home.gerardgascon.com/api/status-page/heartbeat/${UPTIME_KUMA_STATUS_SLUG}
+                url: https://uptime.kamaji.gerardgascon.com/api/status-page/heartbeat/${UPTIME_KUMA_STATUS_SLUG}
             cache: 1m
             template: |
               {{ $hb := .Subrequest "heartbeats" }}
@@ -129,7 +138,7 @@ pages:
                 {{ $id := .String "id" }}
                 {{ $hbArray := $hb.JSON.Array (print "heartbeatList." $id) }}
                 <div class="flex items-center gap-12">
-                  <a class="size-title-dynamic color-highlight text-truncate block grow" href="https://uptime.home.gerardgascon.com/dashboard/{{ $id }}"
+                  <a class="size-title-dynamic color-highlight text-truncate block grow" href="https://uptime.kamaji.gerardgascon.com/dashboard/{{ $id }}"
                     target="_blank" rel="noreferrer">
                     {{ .String "name" }} </a>
 
@@ -172,7 +181,7 @@ pages:
           - type: custom-api
             title: Immich stats
             cache: 1m
-            url: https://immich.home.gerardgascon.com/api/server/statistics
+            url: https://photos.kamaji.gerardgascon.com/api/server/statistics
             headers:
               x-api-key: ${IMMICH_API_KEY}
               Accept: application/json

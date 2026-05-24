@@ -10,7 +10,7 @@ services:
     container_name: grafana
     user: ${PUID:-950}
     environment:
-      - GF_SERVER_ROOT_URL=https://grafana.home.gerardgascon.com
+      - GF_SERVER_ROOT_URL=https://grafana.kamaji.gerardgascon.com
     networks:
       - nginx-proxy-manager
       - analytics
@@ -21,7 +21,7 @@ services:
     labels:
       glance.name: Grafana
       glance.icon: si:grafana
-      glance.url: https://grafana.home.gerardgascon.com
+      glance.url: https://grafana.kamaji.gerardgascon.com
       glance.description: Analytics
       glance.category: services
       glance.hide: false

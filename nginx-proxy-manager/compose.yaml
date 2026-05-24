@@ -18,7 +18,7 @@ services:
     labels:
       glance.name: Nginx Proxy Manager
       glance.description: Reverse Proxy
-      glance.url: https://nginx.home.gerardgascon.com
+      glance.url: https://nginx.kamaji.gerardgascon.com
       glance.icon: si:nginxproxymanager
       glance.category: services
       glance.hide: false

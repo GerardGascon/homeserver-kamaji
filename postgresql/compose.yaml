@@ -18,7 +18,7 @@ services:
       glance.name: PostgreSQL
       glance.icon: si:postgresql
       glance.description: SQL Database
-      glance.url: https://postgres.home.gerardgascon.com
+      glance.url: https://postgres.kamaji.gerardgascon.com
       glance.category: services
       glance.hide: false
       glance.id: postgres

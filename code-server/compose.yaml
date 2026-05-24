@@ -17,7 +17,7 @@ services:
     labels:
       glance.name: Code Server
       glance.icon: si:htmx
-      glance.url: https://code.home.gerardgascon.com
+      glance.url: https://code.kamaji.gerardgascon.com
       glance.description: Edit server scripts
       glance.category: services
       glance.hide: false
