@@ -1,0 +1,22 @@
+networks:
+  nginx-proxy-manager:
+    external: true
+
+services:
+  images:
+    container_name: images
+    image: nginx:latest
+    networks:
+      - nginx-proxy-manager
+    volumes:
+      - ./images:/app/images:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    restart: unless-stopped
+    labels:
+      glance.name: Images
+      glance.icon: si:imagetoolbox
+      glance.description: Image provider for local use
+      glance.url: https://images.kamaji.gerardgascon.com
+      glance.category: services
+      glance.hide: false
+      glance.id: images

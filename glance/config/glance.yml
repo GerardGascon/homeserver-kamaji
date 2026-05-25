@@ -5,6 +5,7 @@ pages:
   - name: Kamaji's Startpage
     center-vertically: true
     hide-desktop-navigation: true
+    show-mobile-header: false
     columns:
       - size: full
         widgets:
@@ -51,6 +52,14 @@ pages:
 
       - size: small
         widgets:
+          - type: custom-api
+            title: Kamaji
+            frameless: true
+            template: |
+              <div class="widget-content" style="padding: 0; overflow: hidden;">
+                <img src="https://images.kamaji.gerardgascon.com/banners/kamaji.jpg">
+              </div>
+
           - type: bookmarks
             title: Servers
             groups:
@@ -61,7 +70,7 @@ pages:
                   url: https://sakamoto.gerardgascon.com/
           
           - type: dns-stats
-            cache: 5s
+            cache: 1m
             service: pihole-v6
             url: https://pihole.kamaji.gerardgascon.com
             password: ${PIHOLE_PASSWORD}
