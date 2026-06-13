@@ -10,7 +10,7 @@ pages:
       - size: full
         widgets:
           - type: search
-            search-engine: duckduckgo
+            search-engine: https://noai.duckduckgo.com/?q={QUERY}&noai
 
           - type: bookmarks
             groups:
@@ -68,6 +68,8 @@ pages:
                   url: https://kamaji.gerardgascon.com/
                 - title: Sakamoto
                   url: https://sakamoto.gerardgascon.com/
+                - title: Rosso
+                  url: https://rosso.gerardgascon.com/
           
           - type: dns-stats
             cache: 1m

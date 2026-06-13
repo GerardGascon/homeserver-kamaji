@@ -16,7 +16,7 @@ services:
       - '--config.file=/etc/prometheus/prometheus.yml'
     volumes:
       - ./prometheus:/etc/prometheus
-      - ./data:/prometheus
+      - ./data:/prometheus/data
     restart: unless-stopped
     labels:
       glance.name: Prometheus
