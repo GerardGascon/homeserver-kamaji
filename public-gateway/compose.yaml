@@ -12,6 +12,8 @@ services:
       - NET_ADMIN
     volumes:
       - ./gluetun:/gluetun
+    ports:
+      - 8881:81
     env_file:
       - .env
     environment:

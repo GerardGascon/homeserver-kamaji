@@ -16,7 +16,12 @@ services:
     networks:
       arr-network:
         ipv4_address: 172.39.0.2
-      nginx-proxy-manager: {}
+    ports:
+      - 8080:8080 # qbittorrent
+      - 4711:4711 # aMule
+      - 6789:6789 # nzbget
+      - 9696:9696 # prowlarr
+      - 9117:9117 # jackett
     volumes:
       - ./gluetun:/gluetun
     env_file:
