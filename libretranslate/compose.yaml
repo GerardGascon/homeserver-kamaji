@@ -1,0 +1,34 @@
+networks:
+  nginx-proxy-manager:
+    external: true
+
+services:
+  libretranslate:
+    container_name: libretranslate
+    image: libretranslate/libretranslate:latest-cuda
+    networks:
+      - nginx-proxy-manager
+    environment:
+     - LT_SUGGESTIONS=True
+     - LT_UPDATE_MODELS=True
+     - LT_DEBUG=True
+     - PUID=root
+    volumes:
+     - ./db:/app/db
+     - ./data:/root/.local:rw
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    labels:
+      glance.name: LibreTranslate
+      glance.icon: si:libretranslate
+      glance.description: Open Source Machine Translation
+      glance.url: https://translate.kamaji.gerardgascon.com
+      glance.category: services
+      glance.hide: false
+      glance.id: libretranslate
