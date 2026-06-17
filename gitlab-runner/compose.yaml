@@ -1,6 +1,6 @@
 services:
   gitlab-runner:
-    image: gitlab/gitlab-runner:alpine-v18.10.0
+    image: gitlab/gitlab-runner:alpine-v19.0.1
     container_name: gitlab-runner
     volumes:
       - ./config/config.toml:/etc/gitlab-runner/config.toml:ro
