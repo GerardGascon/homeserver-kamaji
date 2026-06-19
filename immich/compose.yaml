@@ -17,7 +17,7 @@ services:
       file: hwaccel.transcoding.yml
       service: nvenc # set to one of [nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
     volumes:
-      - /mnt/NVMe/photos:/data
+      - /mnt/storage0/photos:/data
       - /etc/localtime:/etc/localtime:ro
     env_file:
       - .env

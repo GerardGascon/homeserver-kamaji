@@ -10,7 +10,7 @@ services:
     networks:
       - nginx-proxy-manager
     volumes:
-      - /mnt/NVMe/files:/srv
+      - /mnt/storage0/files:/srv
       - ./database:/database
       - ./config:/config
     security_opt:

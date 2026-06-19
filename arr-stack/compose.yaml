@@ -58,7 +58,7 @@ services:
       - TORRENTING_PORT=${TORRENTING_PORT}
     volumes:
       - ./qbittorrent:/config
-      - /mnt/NVMe/downloads/qbittorrent:/downloads
+      - /mnt/storage0/downloads/qbittorrent:/downloads
     depends_on:
       arr-gluetun:
         condition: service_healthy
@@ -97,7 +97,7 @@ services:
     volumes:
       - ./amule/config:/home/amule/.aMule
       - ./amule/temp:/temp
-      - /mnt/NVMe/downloads/aMule:/incoming
+      - /mnt/storage0/downloads/aMule:/incoming
     depends_on:
       arr-gluetun:
         condition: service_healthy
@@ -135,7 +135,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./nzbget:/config
-      - /mnt/NVMe/downloads:/downloads
+      - /mnt/storage0/downloads:/downloads
     depends_on:
       arr-gluetun:
         condition: service_healthy
@@ -200,7 +200,7 @@ services:
       - AUTO_UPDATE=true
     volumes:
       - ./jackett:/config
-      - /mnt/NVMe/downloads:/downloads
+      - /mnt/storage0/downloads:/downloads
     depends_on:
       arr-gluetun:
         condition: service_healthy
@@ -228,7 +228,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - ./sonarr:/config
       - /mnt/storage1/media:/data/media
-      - /mnt/NVMe/downloads/qbittorrent/completed:/downloads/completed
+      - /mnt/storage0/downloads/qbittorrent/completed:/downloads/completed
     networks:
       arr-network:
         ipv4_address: 172.39.0.3
@@ -253,9 +253,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./radarr:/config
-      - /mnt/storage1/media/Movies:/data/Movies
       - /mnt/storage1/media:/data/media
-      - /mnt/NVMe/downloads/qbittorrent/completed:/downloads/completed
+      - /mnt/storage0/downloads/qbittorrent/completed:/downloads/completed
     networks:
       arr-network:
         ipv4_address: 172.39.0.4
@@ -277,7 +276,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - ./lidarr:/config
       - /mnt/storage1/media:/data/media
-      - /mnt/NVMe/downloads/qbittorrent/completed:/downloads/completed
+      - /mnt/storage0/downloads/qbittorrent/completed:/downloads/completed
     environment:
       - PUID=${PUID:-950}
       - PGID=${PGID:-950}
@@ -307,7 +306,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - ./bazarr:/config
       - /mnt/storage1/media:/data/media
-      - /mnt/NVMe/downloads/qbittorrent/completed:/downloads/completed
+      - /mnt/storage0/downloads/qbittorrent/completed:/downloads/completed
     networks:
       arr-network:
         ipv4_address: 172.39.0.6
