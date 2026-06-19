@@ -44,11 +44,6 @@ scrape_configs:
   static_configs:
   - targets:
     - sakamoto.gerardgascon.com:9100
-- job_name: truenas_exporter
-  scrape_interval: 30s
-  static_configs:
-  - targets:
-    - truenas-exporter:9108
 - job_name: qbittorrent_exporter
   static_configs:
   - targets:

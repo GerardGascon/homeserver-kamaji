@@ -140,15 +140,6 @@ services:
       glance.hide: false
       glance.parent: prometheus
 
-  truenas-exporter:
-    container_name: truenas-exporter
-    image: ghcr.io/unknowlars/truenas-scale-api-prometheus-exporter:latest
-    networks:
-      - analytics
-    restart: unless-stopped
-    env_file:
-      - truenas-exporter.env
-
   qbittorrent-exporter:
     container_name: qbittorrent-exporter
     image: ghcr.io/esanchezm/prometheus-qbittorrent-exporter
