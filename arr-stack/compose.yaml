@@ -227,7 +227,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./sonarr:/config
-      - /mnt/storage0/media:/data/media
+      - /mnt/storage1/media:/data/media
       - /mnt/NVMe/downloads/qbittorrent/completed:/downloads/completed
     networks:
       arr-network:
@@ -253,8 +253,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./radarr:/config
-      - /mnt/storage0/media/Movies:/data/Movies
-      - /mnt/storage0/media:/data/media
+      - /mnt/storage1/media/Movies:/data/Movies
+      - /mnt/storage1/media:/data/media
       - /mnt/NVMe/downloads/qbittorrent/completed:/downloads/completed
     networks:
       arr-network:
@@ -276,7 +276,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./lidarr:/config
-      - /mnt/storage0/media:/data/media
+      - /mnt/storage1/media:/data/media
       - /mnt/NVMe/downloads/qbittorrent/completed:/downloads/completed
     environment:
       - PUID=${PUID:-950}
@@ -306,7 +306,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./bazarr:/config
-      - /mnt/storage0/media:/data/media
+      - /mnt/storage1/media:/data/media
       - /mnt/NVMe/downloads/qbittorrent/completed:/downloads/completed
     networks:
       arr-network:

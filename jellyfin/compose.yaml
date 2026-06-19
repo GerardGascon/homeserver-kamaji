@@ -11,7 +11,7 @@ services:
     volumes:
       - ./config:/config
       - ./cache:/cache
-      - /mnt/storage0/media:/media
+      - /mnt/storage1/media:/media
     restart: unless-stopped
     runtime: nvidia
     deploy:
