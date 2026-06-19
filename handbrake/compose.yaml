@@ -4,12 +4,34 @@ networks:
 
 services:
   handbrake:
-    image: jlesage/handbrake
+    image: zocker160/handbrake-nvenc
     networks:
       - nginx-proxy-manager
+    env_file:
+      - .env
+    environment:
+      - DARK_MODE=1
+      - WEB_AUTHENTICATION=1
+      - SECURE_CONNECTION=1
+      - WEB_AUTHENTICATION_USERNAME=${WEB_AUTHENTICATION_USERNAME}
+      - WEB_AUTHENTICATION_PASSWORD=${WEB_AUTHENTICATION_PASSWORD}
     volumes:
       - "./config:/config:rw"
       - "./storage:/storage:ro"
-      # TODO: See how I can automate this
-      # - "/home/user/HandBrake/watch:/watch:rw"
-      # - "/home/user/HandBrake/output:/output:rw"
+      - "/mnt/storage0/ripping/watch:/watch:rw"
+      - "/mnt/storage0/ripping/output:/output:rw"
+    restart: unless-stopped
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - count: all
+              capabilities: [gpu]
+    labels:
+      glance.name: HandBrake
+      glance.icon: si:ffmpeg
+      glance.url: https://handbrake.kamaji.gerardgascon.com
+      glance.description: Transcoding
+      glance.category: services
+      glance.hide: false
+      glance.id: handbrake

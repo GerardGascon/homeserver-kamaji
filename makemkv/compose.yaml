@@ -1,0 +1,33 @@
+networks:
+  nginx-proxy-manager:
+    external: true
+
+services:
+  makemkv:
+    image: jlesage/makemkv
+    networks:
+      - nginx-proxy-manager
+    volumes:
+      - "./config:/config:rw"
+      # - "/home/user:/storage:ro"
+      - "/mnt/storage0/ripping/watch:/output:rw"
+    # devices:
+    #   - "/dev/sr0:/dev/sr0"
+    #   - "/dev/sg2:/dev/sg2"
+    env_file:
+      - .env
+    environment:
+      - DARK_MODE=1
+      - WEB_AUTHENTICATION=1
+      - SECURE_CONNECTION=1
+      - WEB_AUTHENTICATION_USERNAME=${WEB_AUTHENTICATION_USERNAME}
+      - WEB_AUTHENTICATION_PASSWORD=${WEB_AUTHENTICATION_PASSWORD}
+    restart: unless-stopped
+    labels:
+      glance.name: MakeMKV
+      glance.icon: si:discogs
+      glance.url: https://makemkv.kamaji.gerardgascon.com
+      glance.description: DVD/BluRay ripping
+      glance.category: services
+      glance.hide: false
+      glance.id: makemkv
