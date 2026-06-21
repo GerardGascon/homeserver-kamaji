@@ -10,11 +10,20 @@ services:
     env_file:
       - .env
     environment:
+      - USER_ID=${PUID:-950}
+      - GROUP_ID=${PGID:-950}
+      - TZ=${TZ:-Europe/Madrid}
       - DARK_MODE=1
       - WEB_AUTHENTICATION=1
       - SECURE_CONNECTION=1
       - WEB_AUTHENTICATION_USERNAME=${WEB_AUTHENTICATION_USERNAME}
       - WEB_AUTHENTICATION_PASSWORD=${WEB_AUTHENTICATION_PASSWORD}
+      - AUTOMATED_CONVERSION=1
+      - AUTOMATED_CONVERSION_PRESET=Custom/H.265 4K
+      - AUTOMATED_CONVERSION_FORMAT=mkv
+      - AUTOMATED_CONVERSION_KEEP_SOURCE=0
+      - AUTOMATED_CONVERSION_OUTPUT_SUBDIR=SAME_AS_SRC
+      - AUTOMATED_CONVERSION_NON_VIDEO_FILE_ACTION=copy
     volumes:
       - "./config:/config:rw"
       - "./storage:/storage:ro"

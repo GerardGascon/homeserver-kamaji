@@ -17,6 +17,9 @@ services:
     env_file:
       - .env
     environment:
+      - USER_ID=${PUID:-950}
+      - GROUP_ID=${PGID:-950}
+      - TZ=${TZ:-Europe/Madrid}
       - DARK_MODE=1
       - WEB_AUTHENTICATION=1
       - SECURE_CONNECTION=1
