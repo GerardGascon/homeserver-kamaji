@@ -11,9 +11,9 @@ services:
       - "./config:/config:rw"
       # - "/home/user:/storage:ro"
       - "/mnt/storage0/ripping/watch:/output:rw"
-    # devices:
-    #   - "/dev/sr0:/dev/sr0"
-    #   - "/dev/sg2:/dev/sg2"
+    devices:
+      - "/dev/sr0:/dev/sr0"
+      - "/dev/sg1:/dev/sg1"
     env_file:
       - .env
     environment:
