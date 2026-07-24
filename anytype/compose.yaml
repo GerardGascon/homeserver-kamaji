@@ -9,7 +9,7 @@ services:
       - ./data:/data
     environment:
       # Advertise addresses clients should use. Replace with your server hostname/IP.
-      ANY_SYNC_BUNDLE_INIT_EXTERNAL_ADDRS: "anysync.home.gerardgascon.com"
+      ANY_SYNC_BUNDLE_INIT_EXTERNAL_ADDRS: "anysync.kamaji.gerardgascon.com"
       # Storage limit per space in bytes (default: 1 TiB)
       # Examples:   1 GiB = 1073741824
       #            10 GiB = 10737418240
