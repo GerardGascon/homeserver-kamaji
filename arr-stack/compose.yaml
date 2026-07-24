@@ -22,6 +22,7 @@ services:
       - 6789:6789 # nzbget
       - 9696:9696 # prowlarr
       - 9117:9117 # jackett
+      - 8000:30321 # downtify
     volumes:
       - ./gluetun:/gluetun
     env_file:
@@ -112,6 +113,34 @@ services:
       glance.category: arr-stack
       glance.hide: false
       glance.id: amule
+  
+  downtify:
+    image: ghcr.io/henriquesebastiao/downtify:latest
+    container_name: downtify
+    env_file:
+      - .env
+    environment:
+      - PUID=${PUID:-950}
+      - PGID=${PGID:-950}
+      - TZ=${TZ:-Etc/UTC}
+      - DOWNTIFY_PORT=30321
+    volumes:
+      - /mnt/storage0/downloads/downtify:/downloads
+      - ./downtify:/data
+    depends_on:
+      arr-gluetun:
+        condition: service_healthy
+        restart: true
+    network_mode: service:arr-gluetun
+    restart: unless-stopped
+    labels:
+      glance.name: Downtify
+      glance.icon: si:spotify
+      glance.description: Spotify/YouTube Music Downloader
+      glance.url: https://downtify.kamaji.gerardgascon.com
+      glance.category: arr-stack
+      glance.hide: false
+      glance.id: downtify
   
   deunhealth:
     image: qmcgaw/deunhealth
@@ -267,32 +296,6 @@ services:
       glance.category: arr-stack
       glance.hide: false
       glance.id: radarr
-
-  lidarr:
-    container_name: lidarr
-    image: lscr.io/linuxserver/lidarr:latest
-    restart: unless-stopped
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - ./lidarr:/config
-      - /mnt/storage1/media:/data/media
-      - /mnt/storage0/downloads/qbittorrent/completed:/downloads/completed
-    environment:
-      - PUID=${PUID:-950}
-      - PGID=${PGID:-950}
-      - TZ=${TZ:-Etc/UTC}
-    networks:
-      arr-network:
-        ipv4_address: 172.39.0.5
-      nginx-proxy-manager: {}
-    labels:
-      glance.name: Lidarr
-      glance.icon: si:sonarr
-      glance.description: Music Collection Manager
-      glance.url: https://lidarr.kamaji.gerardgascon.com
-      glance.category: arr-stack
-      glance.hide: false
-      glance.id: lidarr
 
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
