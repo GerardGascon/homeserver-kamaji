@@ -297,6 +297,29 @@ services:
       glance.hide: false
       glance.id: radarr
 
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    restart: unless-stopped
+    environment:
+      - PUID=3000
+      - PGID=3000
+      - TZ=${TZ:-Etc/UTC}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./lidarr:/config
+      - /mnt/storage1/media:/data/media
+    networks:
+      - nginx-proxy-manager
+    labels:
+      glance.name: Lidarr
+      glance.icon: si:sonarr
+      glance.description: Music Collection Manager
+      glance.url: https://lidarr.kamaji.gerardgascon.com
+      glance.category: arr-stack
+      glance.hide: false
+      glance.id: lidarr
+
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr

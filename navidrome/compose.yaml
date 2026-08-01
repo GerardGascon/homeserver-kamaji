@@ -1,0 +1,33 @@
+networks:
+  nginx-proxy-manager:
+    external: true
+
+services:
+  navidrome:
+    container_name: navidrome
+    image: deluan/navidrome:latest
+    user: 950:3000
+    networks:
+      - nginx-proxy-manager
+    env_file:
+      - .env
+    environment:
+      # Optional: put your config options customization here. Examples:
+      # ND_LOGLEVEL: debug
+      ND_ENABLEINSIGHTSCOLLECTOR: false
+      ND_ENABLESHARING: false
+      ND_PROMETHEUS_ENABLED: true
+      ND_PROMETHEUS_METRICSPATH: "/metrics_${METRICS_SECRET_KEY}"
+      ND_SMARTPLAYLISTREFRESHDELAY: 15m
+    volumes:
+      - "./data:/data"
+      - "/mnt/storage1/media/Music:/music:ro"
+    restart: unless-stopped
+    labels:
+      glance.name: Navidrome
+      glance.icon: si:applemusic
+      glance.url: https://navidrome.kamaji.gerardgascon.com
+      glance.description: Music Streaming Service
+      glance.category: services
+      glance.hide: false
+      glance.id: navidrome

@@ -11,17 +11,16 @@ services:
     environment:
       - SERVER_NAME=Geri's Media Server # pre-defined server name
       - SERVER_LOCK=true # When true AND name/type/url are set, only username/password can be toggled
-      - SERVER_TYPE=jellyfin # the allowed types are: jellyfin, navidrome, subsonic. These values are case insensitive
-      - SERVER_URL=https://jellyfin.kamaji.gerardgascon.com
-      - REMOTE_URL=https://media.gerardgascon.com
+      - SERVER_TYPE=navidrome # the allowed types are: jellyfin, navidrome, subsonic. These values are case insensitive
+      - SERVER_URL=https://music.gerardgascon.com
       - LEGACY_AUTHENTICATION=false # When SERVER_LOCK is true, sets the legacy (plaintext) authentication flag for Subsonic/OpenSubsonic servers
       - ANALYTICS_DISABLED=true # Set to true to disable Umami analytics tracking
     restart: unless-stopped
     labels:
       glance.name: Feishin
-      glance.icon: si:jellyfin
+      glance.icon: si:applemusic
       glance.url: https://feishin.kamaji.gerardgascon.com
-      glance.description: Music player for Jellyfin
+      glance.description: Music player for Navidrome
       glance.category: services
       glance.hide: false
       glance.id: jellyfin

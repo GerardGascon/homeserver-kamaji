@@ -12,8 +12,11 @@ services:
       - nginx-proxy-manager
       - analytics
     user: ${PUID:-950}
+    env_file:
+      - .env
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--enable-feature=expand-external-labels'
     volumes:
       - ./prometheus:/etc/prometheus
       - ./data:/prometheus/data
