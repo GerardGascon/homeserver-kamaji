@@ -23,6 +23,7 @@ services:
       - 9696:9696 # prowlarr
       - 9117:9117 # jackett
       - 8000:30321 # downtify
+      - 5031:5031 # soulseek (https)
     volumes:
       - ./gluetun:/gluetun
     env_file:
@@ -32,7 +33,7 @@ services:
       - HEALTH_TARGET_ADDRESSES=www.google.com
       - DNS_ADDRESS=8.8.8.8
       # - FIREWALL_VPN_INPUT_PORTS=${TORRENTING_PORT},${AMULE_ED2K_TCP},${AMULE_ED2K_GLOBAL_SEARCH},${AMULE_ED2K_UDP}
-      - FIREWALL_VPN_INPUT_PORTS=${TORRENTING_PORT},${AMULE_ED2K_TCP},${AMULE_ED2K_GLOBAL_SEARCH}
+      - FIREWALL_VPN_INPUT_PORTS=${TORRENTING_PORT},${AMULE_ED2K_TCP},${AMULE_ED2K_GLOBAL_SEARCH},${SLSKD_SLSK_LISTEN_PORT}
     healthcheck:
       test: ping -c 1 www.google.com || exit 1
       interval: 20s
@@ -113,6 +114,39 @@ services:
       glance.category: arr-stack
       glance.hide: false
       glance.id: amule
+  
+  slskd:
+    image: slskd/slskd
+    container_name: slskd
+    user: "950:3004"
+    network_mode: service:arr-gluetun
+    environment:
+      - SLSKD_REMOTE_CONFIGURATION=true
+      - SLSKD_USERNAME=${SLSKD_USERNAME}
+      - SLSKD_PASSWORD=${SLSKD_PASSWORD}
+      - SLSKD_SLSK_USERNAME=${SLSKD_SLSK_USERNAME}
+      - SLSKD_SLSK_PASSWORD=${SLSKD_SLSK_PASSWORD}
+      - SLSKD_SLSK_LISTEN_PORT=${SLSKD_SLSK_LISTEN_PORT}
+      - SLSKD_DOWNLOADS_DIR=/downloads
+      - SLSKD_SHARED_DIR=/shared
+      - SLSKD_UPLOAD_SPEED_LIMIT=20000
+    volumes:
+      - ./soulseek:/app
+      - /mnt/storage0/downloads/soulseek/download:/downloads
+      - /mnt/storage0/downloads/soulseek/share:/shared
+    depends_on:
+      arr-gluetun:
+        condition: service_healthy
+        restart: true
+    restart: unless-stopped
+    labels:
+      glance.name: slskd
+      glance.icon: si:musicbrainz
+      glance.description: Soulseek client
+      glance.url: https://soulseek.kamaji.gerardgascon.com
+      glance.category: arr-stack
+      glance.hide: false
+      glance.id: slskd
   
   downtify:
     image: ghcr.io/henriquesebastiao/downtify:latest
@@ -296,29 +330,6 @@ services:
       glance.category: arr-stack
       glance.hide: false
       glance.id: radarr
-
-  lidarr:
-    image: lscr.io/linuxserver/lidarr:latest
-    container_name: lidarr
-    restart: unless-stopped
-    environment:
-      - PUID=3000
-      - PGID=3000
-      - TZ=${TZ:-Etc/UTC}
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - ./lidarr:/config
-      - /mnt/storage1/media:/data/media
-    networks:
-      - nginx-proxy-manager
-    labels:
-      glance.name: Lidarr
-      glance.icon: si:sonarr
-      glance.description: Music Collection Manager
-      glance.url: https://lidarr.kamaji.gerardgascon.com
-      glance.category: arr-stack
-      glance.hide: false
-      glance.id: lidarr
 
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
