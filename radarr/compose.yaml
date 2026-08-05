@@ -1,0 +1,28 @@
+networks:
+  nginx-proxy-manager:
+    external: true
+
+services:
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    restart: unless-stopped
+    environment:
+      - PUID=950
+      - PGID=3000
+      - TZ=${TZ:-Etc/UTC}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config:/config
+      - /mnt/storage1/media:/data/media
+      - /mnt/storage0/downloads/qbittorrent/completed:/downloads/completed
+    networks:
+      - nginx-proxy-manager
+    labels:
+      glance.name: Radarr
+      glance.icon: si:radarr
+      glance.description: Movie Collection Manager
+      glance.url: https://radarr.kamaji.gerardgascon.com
+      glance.category: arr-stack
+      glance.hide: false
+      glance.id: radarr

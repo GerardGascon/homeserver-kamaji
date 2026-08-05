@@ -1,0 +1,30 @@
+networks:
+  nginx-proxy-manager:
+    external: true
+
+services:
+  seerr:
+    container_name: seerr
+    image: ghcr.io/seerr-team/seerr:latest
+    user: "950:3000"
+    environment:
+      - TZ=${TZ:-Etc/UTC}
+    volumes:
+      - ./config:/app/config
+    networks:
+      - nginx-proxy-manager
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:5055/api/v1/status || exit 1
+      start_period: 20s
+      timeout: 3s
+      interval: 15s
+      retries: 3
+    restart: unless-stopped
+    labels:
+      glance.name: Seerr
+      glance.icon: si:jellyfin
+      glance.description: Media Request Manager
+      glance.url: https://seerr.kamaji.gerardgascon.com
+      glance.category: arr-stack
+      glance.hide: false
+      glance.id: seerr
