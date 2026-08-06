@@ -1,0 +1,27 @@
+networks:
+  nginx-proxy-manager:
+    external: true
+
+services:
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    networks:
+      - nginx-proxy-manager
+    environment:
+      - PUID=${PUID:-950}
+      - PGID=${PGID:-950}
+      - TZ=${TZ:-Etc/UTC}
+      - AUTO_UPDATE=true
+    volumes:
+      - ./config:/config
+      - /mnt/storage0/downloads:/downloads
+    restart: unless-stopped
+    labels:
+      glance.name: Jackett
+      glance.icon: si:bittorrent
+      glance.description: Indexer Manager
+      glance.url: https://jackett.kamaji.gerardgascon.com
+      glance.category: arr-stack
+      glance.hide: false
+      glance.id: jackett
