@@ -118,6 +118,8 @@ services:
     image: slskd/slskd
     container_name: slskd
     user: "950:3004"
+    group_add:
+      - "3000"
     network_mode: service:arr-gluetun
     environment:
       - SLSKD_REMOTE_CONFIGURATION=true
@@ -132,7 +134,7 @@ services:
     volumes:
       - ./soulseek:/app
       - /mnt/storage0/downloads/soulseek/download:/downloads
-      - /mnt/storage0/downloads/soulseek/share:/shared
+      - /mnt/storage1/media/Music:/shared:ro
     depends_on:
       arr-gluetun:
         condition: service_healthy
