@@ -19,9 +19,13 @@ services:
       ND_PROMETHEUS_ENABLED: true
       ND_PROMETHEUS_METRICSPATH: "/metrics_${METRICS_SECRET_KEY}"
       ND_SMARTPLAYLISTREFRESHDELAY: 15m
+      ND_PLUGINS_ENABLED: true
+      ND_PLUGINS_AUTORELOAD: true
+      ND_AGENTS: audiomuseai,lastfm,deezer
+      ND_LYRICSPRIORITY: ".ttml,.yaml,.yml,.elrc,.lrc,.srt,.txt,embedded,nd-lyrics"
     volumes:
       - "./data:/data"
-      - "/mnt/storage1/media/Music:/music:ro"
+      - "/mnt/storage1/media/Music:/music"
     restart: unless-stopped
     labels:
       glance.name: Navidrome

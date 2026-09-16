@@ -13,11 +13,7 @@ services:
       - USER_ID=${PUID:-950}
       - GROUP_ID=${PGID:-950}
       - TZ=${TZ:-Europe/Madrid}
-      - DARK_MODE=1
-      - WEB_AUTHENTICATION=1
-      - SECURE_CONNECTION=1
-      - WEB_AUTHENTICATION_USERNAME=${WEB_AUTHENTICATION_USERNAME}
-      - WEB_AUTHENTICATION_PASSWORD=${WEB_AUTHENTICATION_PASSWORD}
+      - HANDBRAKE_GUI=0
       - AUTOMATED_CONVERSION=1
       - AUTOMATED_CONVERSION_PRESET=Custom/H.265 4K
       - AUTOMATED_CONVERSION_FORMAT=mkv
@@ -39,7 +35,6 @@ services:
     labels:
       glance.name: HandBrake
       glance.icon: si:ffmpeg
-      glance.url: https://handbrake.kamaji.gerardgascon.com
       glance.description: Transcoding
       glance.category: services
       glance.hide: false

@@ -1,0 +1,28 @@
+networks:
+  nginx-proxy-manager:
+    external: true
+
+services:
+  docker-ripper:
+    container_name: docker-ripper
+    image: ghcr.io/gerardgascon/docker-ripper:latest
+    networks:
+      - nginx-proxy-manager
+    volumes:
+      - /mnt/storage0/ripping/output:/out/audio:rw
+    devices:
+      - "/dev/sr0:/dev/sr0"
+    environment:
+      - EJECTENABLED=true
+      - STORAGE_CD=/out/audio
+      - DRIVE=/dev/sr0
+      - FILEUSER=950 # optional - defines the user ownership of created files
+      - FILEGROUP=950 # optional - defines the group ownership of created files
+    restart: unless-stopped
+    labels:
+      glance.name: CD Ripper
+      glance.icon: si:discogs
+      glance.description: CD automatic ripping
+      glance.category: services
+      glance.hide: false
+      glance.id: cd-ripper

@@ -1,0 +1,90 @@
+networks:
+  nginx-proxy-manager:
+    external: true
+
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    depends_on:
+      - faster-whisper
+      - piper
+    networks:
+      - nginx-proxy-manager
+    ports:
+      - 8123:8123
+    volumes:
+      - ./config:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+    stop_grace_period: 60s
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+  
+  music-assistant-server:
+    image: ghcr.io/music-assistant/server:latest
+    container_name: music-assistant-server
+    networks:
+      - nginx-proxy-manager
+    ports:
+      - "8095:8095"
+      - "8097:8097"
+    volumes:
+      - ./music-assistant-server/data:/data/
+    environment:
+      - LOG_LEVEL=info
+    restart: unless-stopped
+
+  faster-whisper:
+    image: lscr.io/linuxserver/faster-whisper:gpu
+    container_name: faster-whisper
+    networks:
+      - nginx-proxy-manager
+    environment:
+      - PUID=950
+      - PGID=950
+      - TZ=Europe/Madrid
+      - DEBUG= #optional
+      - WHISPER_BEAM=5 #optional
+      - WHISPER_LANG=ca #optional
+      - WHISPER_MODEL=large #optional
+    volumes:
+      - ./faster-whisper/data:/config
+    ports:
+      - 10300:10300
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: unless-stopped
+
+  piper:
+    container_name: piper
+    image: lscr.io/linuxserver/piper:latest
+    networks:
+      - nginx-proxy-manager
+    environment:
+      - PUID=950
+      - PGID=950
+      - TZ=Europe/Madrid
+      - PIPER_VOICE=ca_ES-upc_ona-medium
+      - LOCAL_ONLY=true
+      - PIPER_LENGTH=1.0 #optional
+      - PIPER_NOISE=0.667 #optional
+      - PIPER_NOISEW=0.333 #optional
+      - PIPER_SPEAKER=0 #optional
+    volumes:
+      - ./piper:/config
+    ports:
+      - 10200:10200
+    restart: unless-stopped
+
+volumes:
+  ha-whisper-models:
+  ha-whisper-data:
