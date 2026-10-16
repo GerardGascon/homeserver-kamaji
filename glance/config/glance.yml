@@ -93,8 +93,9 @@ pages:
 
               {{- else -}}
 
-                {{- $requestUrl := printf "%s/emby/Items/Counts?api_key=%s" $url $key -}}
-                {{- $jellyfinData := newRequest $requestUrl | getResponse -}}
+                {{- $requestUrl := printf "%s/Items/Counts" $url -}}
+                {{- $authHeader := printf "MediaBrowser Token=\"%s\"" $key -}}
+                {{- $jellyfinData := newRequest $requestUrl | withHeader "Authorization" $authHeader | getResponse -}}
 
                 {{- if eq $jellyfinData.Response.StatusCode 200 -}}
                   <div class="flex flex-column gap-5">
@@ -126,6 +127,29 @@ pages:
                   <p>Failed: {{ $jellyfinData.Response.Status }}</p>
                 {{- end -}}
               {{- end -}}
+
+          - type: custom-api
+            title: Immich stats
+            cache: 1m
+            url: https://photos.kamaji.gerardgascon.com/api/server/statistics
+            headers:
+              x-api-key: ${IMMICH_API_KEY}
+              Accept: application/json
+            template: |
+              <div class="flex justify-between text-center">
+                <div>
+                    <div class="color-highlight size-h3">{{ .JSON.Int "photos" | formatNumber }}</div>
+                    <div class="size-h6">PHOTOS</div>
+                </div>
+                <div>
+                    <div class="color-highlight size-h3">{{ .JSON.Int "videos" | formatNumber }}</div>
+                    <div class="size-h6">VIDEOS</div>
+                </div>
+                <div>
+                    <div class="color-highlight size-h3">{{ div (.JSON.Int "usage" | toFloat) 1073741824 | toInt | formatNumber }}GB</div>
+                    <div class="size-h6">USAGE</div>
+                </div>
+              </div>
 
           - type: custom-api
             title: Server Status
@@ -189,26 +213,3 @@ pages:
                 {{ end }}
               </ul>
               {{ end }}
-
-          - type: custom-api
-            title: Immich stats
-            cache: 1m
-            url: https://photos.kamaji.gerardgascon.com/api/server/statistics
-            headers:
-              x-api-key: ${IMMICH_API_KEY}
-              Accept: application/json
-            template: |
-              <div class="flex justify-between text-center">
-                <div>
-                    <div class="color-highlight size-h3">{{ .JSON.Int "photos" | formatNumber }}</div>
-                    <div class="size-h6">PHOTOS</div>
-                </div>
-                <div>
-                    <div class="color-highlight size-h3">{{ .JSON.Int "videos" | formatNumber }}</div>
-                    <div class="size-h6">VIDEOS</div>
-                </div>
-                <div>
-                    <div class="color-highlight size-h3">{{ div (.JSON.Int "usage" | toFloat) 1073741824 | toInt | formatNumber }}GB</div>
-                    <div class="size-h6">USAGE</div>
-                </div>
-              </div>

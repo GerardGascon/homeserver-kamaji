@@ -21,7 +21,7 @@ services:
       ND_SMARTPLAYLISTREFRESHDELAY: 15m
       ND_PLUGINS_ENABLED: true
       ND_PLUGINS_AUTORELOAD: true
-      ND_AGENTS: audiomuseai,lastfm,deezer
+      ND_AGENTS: maestro,deezer,lastfm,listenbrainz
       ND_LYRICSPRIORITY: ".ttml,.yaml,.yml,.elrc,.lrc,.srt,nd-lyrics,.txt,embedded"
     volumes:
       - "./data:/data"

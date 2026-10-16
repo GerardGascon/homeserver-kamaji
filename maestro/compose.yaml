@@ -1,0 +1,29 @@
+networks:
+  nginx-proxy-manager:
+    external: true
+
+services:
+  maestro:
+    container_name: maestro
+    image: ghcr.io/j0r6it0/maestro:latest-cuda
+    user: 950:950
+    networks:
+      - nginx-proxy-manager
+    env_file:
+      - .env
+    environment:
+      SUBSONIC_URL: https://navidrome.kamaji.gerardgascon.com
+      SUBSONIC_USER: ${SUBSONIC_USER}
+      SUBSONIC_PASSWORD: ${SUBSONIC_PASSWORD}
+      TZ: Europe/Madrid
+      ANALYZE_CRON: "0 2 * * *"
+    volumes:
+      - ./data:/data
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: unless-stopped
